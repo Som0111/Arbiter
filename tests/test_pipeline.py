@@ -1,9 +1,20 @@
 from datetime import UTC, datetime
+from unittest.mock import MagicMock
 
+import pytest
 from conftest import HEADERS, TENANTS
 
 from arbiter.budget import BudgetTracker, RateLimiter
-from arbiter.logger import RequestLog, write_log
+from arbiter.logger import RequestLog, read_logs, write_log
+from arbiter.router import GatewayError, LLMResult
+
+
+@pytest.fixture(autouse=True)
+def fake_llm(monkeypatch):
+    mock = MagicMock(return_value=LLMResult("hello", "groq/llama-3.1-8b-instant", 5, 7, 0.001, False))
+    monkeypatch.setattr("arbiter.api.call_llm", mock)
+    return mock
+
 
 BODY = {"prompt": "hi", "tenant_id": "tenant_test"}
 SCHEMA = {
@@ -25,10 +36,28 @@ def test_health_needs_no_key(client):
     assert r.json()["tenant_count"] == len(TENANTS)
 
 
-def test_generate_stub_schema(client):
+def test_generate_schema_and_side_effects(app, client, fake_llm):
     r = client.post("/generate", json=BODY, headers=HEADERS)
-    assert set(r.json()) == SCHEMA
-    assert r.json()["response"] == "stub"
+    body = r.json()
+    assert set(body) == SCHEMA
+    assert (body["response"], body["tier"], body["cost_usd"]) == ("hello", "simple", 0.001)
+    fake_llm.assert_called_once_with("simple", "hi", 512)
+    assert abs(app.state.budget.get_remaining("tenant_test") - (999.0 - 0.001)) < 1e-9
+    assert [row["request_id"] for row in read_logs()] == [body["request_id"]]
+
+
+def test_tier_cap_applied_to_llm_call(client, fake_llm):
+    code = {"prompt": "Implement a function to debug this: def f(): pass", "tenant_id": "tenant_a"}
+    client.post("/generate", json=code, headers=HEADERS)
+    assert fake_llm.call_args.args[0] == "standard"  # complex capped for tenant_a
+
+
+def test_all_models_exhausted_503_and_logged(client, fake_llm):
+    fake_llm.side_effect = GatewayError("all models exhausted")
+    r = client.post("/generate", json=BODY, headers=HEADERS)
+    assert r.status_code == 503
+    row = read_logs()[0]
+    assert (row["success"], row["error"]) == (False, "all_models_exhausted")
 
 
 def test_unknown_tenant_404_and_bad_input_422(client):

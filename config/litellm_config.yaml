@@ -1,0 +1,20 @@
+model_list:
+  - model_name: tier1
+    litellm_params:
+      model: groq/llama-3.1-8b-instant
+      api_key: "os.environ/GROQ_API_KEY"
+
+  - model_name: tier2
+    litellm_params:
+      model: gemini/gemini-1.5-flash
+      api_key: "os.environ/GEMINI_API_KEY"
+
+  - model_name: tier3
+    litellm_params:
+      model: groq/llama-3.1-70b-versatile
+      api_key: "os.environ/GROQ_API_KEY"
+
+  - model_name: tier3_fallback
+    litellm_params:
+      model: gemini/gemini-1.5-pro
+      api_key: "os.environ/GEMINI_API_KEY"
