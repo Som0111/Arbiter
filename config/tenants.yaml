@@ -1,0 +1,15 @@
+tenants:
+  tenant_a:
+    daily_budget_usd: 0.10
+    tier_cap: standard        # never goes to Tier 3
+    rate_limit_rpm: 20
+
+  tenant_b:
+    daily_budget_usd: 1.00
+    tier_cap: complex         # full access
+    rate_limit_rpm: 60
+
+  tenant_test:
+    daily_budget_usd: 999.0
+    tier_cap: complex
+    rate_limit_rpm: 999
