@@ -17,10 +17,10 @@ TIER_MODEL_MAP = {
 
 # USD per token; used when litellm's cost DB doesn't know the model (returns 0 / raises).
 MANUAL_COST_PER_TOKEN = {
-    "groq/llama-3.1-8b-instant": {"in": 0.05e-6, "out": 0.08e-6},
-    "gemini/gemini-1.5-flash": {"in": 0.075e-6, "out": 0.30e-6},
-    "groq/llama-3.1-70b-versatile": {"in": 0.59e-6, "out": 0.79e-6},
-    "gemini/gemini-1.5-pro": {"in": 3.50e-6, "out": 10.50e-6},
+    "groq/openai/gpt-oss-20b": {"in": 0.075e-6, "out": 0.30e-6},
+    "gemini/gemini-3.1-flash-lite": {"in": 0.25e-6, "out": 1.50e-6},
+    "gemini/gemini-3.8-flash": {"in": 0.75e-6, "out": 3.75e-6},
+    "groq/openai/gpt-oss-120b": {"in": 0.15e-6, "out": 0.60e-6},
 }
 
 ATTEMPTS = 3

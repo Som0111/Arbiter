@@ -1,6 +1,7 @@
 import asyncio
 import time
 import uuid
+from contextlib import asynccontextmanager
 from datetime import UTC, datetime
 from typing import Literal
 
@@ -8,12 +9,20 @@ from fastapi import Depends, FastAPI
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
-from arbiter import __version__, cache
+from arbiter import __version__
 from arbiter.auth import require_api_key
 from arbiter.budget import BudgetTracker, RateLimiter
+from arbiter.cache import CacheEntry, SemanticCache, embed
 from arbiter.classifier import apply_tier_cap, classify_with_source
 from arbiter.config import load_tenants
-from arbiter.logger import RequestLog, compute_stats, read_logs, write_log
+from arbiter.logger import (
+    RequestLog,
+    compute_stats,
+    init_langfuse,
+    read_logs,
+    trace_request,
+    write_log,
+)
 from arbiter.router import GatewayError, call_llm
 
 
@@ -40,10 +49,19 @@ class GenerateResponse(BaseModel):
 
 def create_app(tenants: dict | None = None) -> FastAPI:
     tenants = tenants if tenants is not None else load_tenants()
-    app = FastAPI(title="Arbiter", version=__version__)
+    langfuse = init_langfuse()
+
+    @asynccontextmanager
+    async def lifespan(_app):
+        yield
+        if langfuse:
+            langfuse.shutdown()  # flush pending traces
+
+    app = FastAPI(title="Arbiter", version=__version__, lifespan=lifespan)
     app.state.tenants = tenants
     app.state.budget = BudgetTracker(tenants)
     app.state.limiter = RateLimiter(tenants)
+    app.state.cache = SemanticCache()
     started = time.monotonic()
 
     @app.get("/health")
@@ -68,17 +86,37 @@ def create_app(tenants: dict | None = None) -> FastAPI:
             return JSONResponse({"error": "budget_exceeded"}, status_code=429)
 
         request_id = f"req_{uuid.uuid4().hex[:12]}"
-        tier, _source = classify_with_source(req.prompt)
-        tier, _capped = apply_tier_cap(tier, tenants[req.tenant_id]["tier_cap"])
+        tier, source = classify_with_source(req.prompt)
+        tier, capped = apply_tier_cap(tier, tenants[req.tenant_id]["tier_cap"])
 
-        def log(model="", tin=0, tout=0, cost=0.0, hit=False, fb=False, error=None):
-            write_log(RequestLog(
+        def log(model="", tin=0, tout=0, cost=0.0, hit=False, fb=False, error=None, saved=0.0):
+            entry = RequestLog(
                 request_id, req.tenant_id, tier, model, tin, tout, cost,
                 (time.perf_counter() - t0) * 1000, hit, fb, error is None, error,
-                datetime.now(UTC).isoformat(),
-            ))
+                datetime.now(UTC).isoformat(), saved, capped, source,
+            )
+            write_log(entry)
+            trace_request(langfuse, entry, req.prompt)
 
-        cache.get(req.tenant_id, tier, req.prompt)  # Phase 5 stub: always a miss
+        try:
+            embedding = await asyncio.to_thread(embed, req.prompt)
+        except Exception:  # noqa: BLE001 - the cache is an optimisation; never fail the request
+            embedding = None
+        if embedding is not None and (hit := app.state.cache.get(req.tenant_id, tier, embedding)):
+            log(hit.model, hit=True, saved=hit.cost_usd)
+            return GenerateResponse(
+                response=hit.response,
+                model_used=hit.model,
+                tier=tier,
+                tokens_in=0,
+                tokens_out=0,
+                cost_usd=0.0,
+                latency_ms=(time.perf_counter() - t0) * 1000,
+                cache_hit=True,
+                fallback_triggered=False,
+                request_id=request_id,
+            )
+
         try:
             # call_llm blocks (sync LiteLLM + backoff sleeps), so keep it off the event loop
             res = await asyncio.to_thread(call_llm, tier, req.prompt, req.max_tokens)
@@ -87,6 +125,9 @@ def create_app(tenants: dict | None = None) -> FastAPI:
             return JSONResponse({"error": "all_models_exhausted"}, status_code=503)
 
         app.state.budget.record_actual(req.tenant_id, res.cost_usd)
+        if embedding is not None:
+            app.state.cache.put(req.tenant_id, tier, embedding,
+                                CacheEntry(embedding, res.text, res.model, res.cost_usd, time.time()))
         log(res.model, res.tokens_in, res.tokens_out, res.cost_usd, fb=res.fallback_triggered)
         return GenerateResponse(
             response=res.text,
@@ -103,7 +144,7 @@ def create_app(tenants: dict | None = None) -> FastAPI:
 
     @app.get("/stats", dependencies=[Depends(require_api_key)])
     async def stats():
-        return compute_stats(read_logs())
+        return {**compute_stats(read_logs()), "cache_size": app.state.cache.size()}
 
     return app
 

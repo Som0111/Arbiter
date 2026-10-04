@@ -11,8 +11,15 @@ from arbiter.router import GatewayError, LLMResult
 
 @pytest.fixture(autouse=True)
 def fake_llm(monkeypatch):
-    mock = MagicMock(return_value=LLMResult("hello", "groq/llama-3.1-8b-instant", 5, 7, 0.001, False))
+    mock = MagicMock(return_value=LLMResult("hello", "groq/openai/gpt-oss-20b", 5, 7, 0.001, False))
     monkeypatch.setattr("arbiter.api.call_llm", mock)
+    return mock
+
+
+@pytest.fixture(autouse=True)
+def fake_embed(monkeypatch):
+    mock = MagicMock(return_value=[1.0, 0.0, 0.0])
+    monkeypatch.setattr("arbiter.api.embed", mock)
     return mock
 
 
@@ -118,3 +125,28 @@ def test_rate_limiter_window_slides():
     assert not rl.check("tenant_a")
     t[0] = 60.0
     assert rl.check("tenant_a")
+
+
+def test_second_identical_request_is_cache_hit_with_zero_cost(app, client, fake_llm):
+    first = client.post("/generate", json=BODY, headers=HEADERS).json()
+    second = client.post("/generate", json=BODY, headers=HEADERS).json()
+    assert (first["cache_hit"], second["cache_hit"]) == (False, True)
+    assert (second["response"], second["cost_usd"], second["tokens_in"]) == ("hello", 0.0, 0)
+    assert fake_llm.call_count == 1
+    stats = client.get("/stats", headers=HEADERS).json()
+    assert (stats["cache_hit_rate"], stats["cache_size"]) == (0.5, 1)
+    assert stats["estimated_saved_usd"] == pytest.approx(0.001)
+    assert app.state.budget.get_remaining("tenant_test") == pytest.approx(999.0 - 0.001)
+
+
+def test_other_tenant_does_not_get_cache_hit(client, fake_llm):
+    client.post("/generate", json=BODY, headers=HEADERS)
+    other = {"prompt": "hi", "tenant_id": "tenant_a"}
+    assert client.post("/generate", json=other, headers=HEADERS).json()["cache_hit"] is False
+    assert fake_llm.call_count == 2
+
+
+def test_embedding_failure_does_not_break_request(client, fake_llm, fake_embed):
+    fake_embed.side_effect = RuntimeError("gemini down")
+    r = client.post("/generate", json=BODY, headers=HEADERS)
+    assert (r.status_code, r.json()["cache_hit"]) == (200, False)
