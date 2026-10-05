@@ -11,10 +11,18 @@ model_list:
 
   - model_name: tier3
     litellm_params:
-      model: gemini/gemini-3.8-flash
-      api_key: "os.environ/GEMINI_API_KEY"
+      # Groq's OpenAI-compatible endpoint: LiteLLM can't route "groq/qwen/..." for this model.
+      model: openai/qwen/qwen3.8-27b
+      api_base: https://api.groq.com/openai/v1
+      api_key: "os.environ/GROQ_API_KEY"
 
   - model_name: tier3_fallback
+    litellm_params:
+      model: groq/openai/gpt-oss-120b
+      api_key: "os.environ/GROQ_API_KEY"
+
+  # Gemini's free tier is ~15 requests/day per model, so tier2 falls back to Groq.
+  - model_name: tier2_fallback
     litellm_params:
       model: groq/openai/gpt-oss-120b
       api_key: "os.environ/GROQ_API_KEY"

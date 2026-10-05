@@ -1,0 +1,282 @@
+[
+  {
+    "id": "s001",
+    "baseline_score": 2.0,
+    "routed_score": 5.0,
+    "rationale": "Response A faithfully mirrors the original sentence, while B omits key details and alters meaning.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "s002",
+    "baseline_score": 4.666666666666667,
+    "routed_score": 5.0,
+    "rationale": "Response A provides the translation with explanatory context, while B gives only the bare translation.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "s003",
+    "baseline_score": 5.0,
+    "routed_score": 4.0,
+    "rationale": "Response A provides a full, informative answer while B gives only the minimal correct answer.",
+    "a_is_baseline": true
+  },
+  {
+    "id": "s004",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both responses are identical and correctly provide the date in DD/MM/YYYY format.",
+    "a_is_baseline": true
+  },
+  {
+    "id": "s005",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both answers are correct and relevant; B includes detailed calculation steps while A gives a concise result.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "s006",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both responses correctly identify the review as negative and are identical in content.",
+    "a_is_baseline": true
+  },
+  {
+    "id": "s007",
+    "baseline_score": 4.666666666666667,
+    "routed_score": 5.0,
+    "rationale": "Response A includes both the reactants and products (water, CO\u2082, glucose, O\u2082), while B omits water and oxygen, making it less complete.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "s008",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both answers correctly provide the French translation, but B adds a brief explanatory phrase while A is just the word itself.",
+    "a_is_baseline": true
+  },
+  {
+    "id": "s009",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both responses correctly answer the yes/no question with the same accurate answer.",
+    "a_is_baseline": true
+  },
+  {
+    "id": "s010",
+    "baseline_score": 5.0,
+    "routed_score": 4.333333333333333,
+    "rationale": "Both give the correct temperature, but B provides a full step\u2011by\u2011step calculation while A only states the result.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "s011",
+    "baseline_score": 5.0,
+    "routed_score": 4.666666666666667,
+    "rationale": "Both answers are correct and relevant, but B provides additional contextual information, making it more complete.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "s012",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both responses provide equivalent, accurate short phrases defining 'ephemeral'.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "s013",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both responses correctly answer 'yes'; the only difference is the trailing period in B.",
+    "a_is_baseline": true
+  },
+  {
+    "id": "s014",
+    "baseline_score": 5.0,
+    "routed_score": 4.666666666666667,
+    "rationale": "Response B includes additional accurate context about the symbol's origin, making it more complete than the brief answer in A.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "s015",
+    "baseline_score": 3.3333333333333335,
+    "routed_score": 4.0,
+    "rationale": "A includes the reason for rescheduling while B only states the new day.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "m001",
+    "baseline_score": 4.666666666666667,
+    "routed_score": 4.666666666666667,
+    "rationale": "Both summaries are accurate and on\u2011topic, but neither mentions the initial use of steam for mine pumping, so their completeness is slightly lower.",
+    "a_is_baseline": true
+  },
+  {
+    "id": "m002",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Response A adds extra detail about the three cones, while B provides only the required information.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "m003",
+    "baseline_score": 5.0,
+    "routed_score": 4.0,
+    "rationale": "Response B provides a concise, accurate docstring directly matching the task, while A adds extra optional styles and notes that are less focused.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "m004",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both responses correctly identify a primarily positive sentiment despite negatives, differing only in phrasing.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "m005",
+    "baseline_score": 5.0,
+    "routed_score": 4.666666666666667,
+    "rationale": "B lists all five distinct points, while A combines some into fewer bullets.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "m006",
+    "baseline_score": 5.0,
+    "routed_score": 4.666666666666667,
+    "rationale": "Both answers are correct and on-topic, but A provides a fuller explanation of both the product and shipping aspects.",
+    "a_is_baseline": true
+  },
+  {
+    "id": "m007",
+    "baseline_score": 3.3333333333333335,
+    "routed_score": 5.0,
+    "rationale": "Response A provides a full, accurate docstring matching the function, while B omits the function body, making it incomplete.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "m008",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both responses accurately and fully summarize the excerpt; the main difference is only minor phrasing.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "m009",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both answers correctly explain Rayleigh scattering and the longer path length at sunset, differing only in wording.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "m010",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both responses provide the same accurate, relevant, and complete lists; there is no substantive difference between them.",
+    "a_is_baseline": true
+  },
+  {
+    "id": "m011",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both answers correctly, relevantly, and fully identify the sentiments with appropriate justifications; they differ only in formatting style.",
+    "a_is_baseline": true
+  },
+  {
+    "id": "m012",
+    "baseline_score": 4.666666666666667,
+    "routed_score": 4.666666666666667,
+    "rationale": "Both responses correctly explain the GIL limitation and suggest multiprocessing, differing only in wording.",
+    "a_is_baseline": true
+  },
+  {
+    "id": "m013",
+    "baseline_score": 4.666666666666667,
+    "routed_score": 5.0,
+    "rationale": "Response A provides a full, correctly formatted JSDoc attached to the function, while B only supplies the comment without the surrounding code.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "m014",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both responses accurately capture all action items with owners and deadlines; they differ only in formatting.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "m015",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both responses accurately capture the key points and trade\u2011off, differing mainly in wording style.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "c001",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both responses correctly implement the merge logic, meet the task requirements, and provide example usage, with B adding explicit asserts.",
+    "a_is_baseline": true
+  },
+  {
+    "id": "c002",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both responses correctly implement the required function with equivalent handling of keys, values, decoding, and edge cases.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "c003",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both responses correctly implement the required async fetch with exponential backoff, handling of 4xx/5xx and timeouts, and include usage examples.",
+    "a_is_baseline": true
+  },
+  {
+    "id": "c004",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both responses correctly compute the meeting time and distance with full step\u2011by\u2011step reasoning; they are essentially identical in correctness and completeness.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "c005",
+    "baseline_score": 4.333333333333333,
+    "routed_score": 4.333333333333333,
+    "rationale": "Both answers correctly formulate and solve the equations, note the lack of an integer solution, and discuss possible typos, differing mainly in wording and length.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "c006",
+    "baseline_score": 5.0,
+    "routed_score": 4.0,
+    "rationale": "Response A fully meets the word count and covers all required points, while B is cut off and thus less complete.",
+    "a_is_baseline": true
+  },
+  {
+    "id": "c007",
+    "baseline_score": 3.6666666666666665,
+    "routed_score": 5.0,
+    "rationale": "Response A provides a more thorough, detailed comparison covering all required dimensions, while B is shorter and omits several nuanced points.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "c008",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both responses accurately identify the bug, explain it, and provide a correct implementation with appropriate tests.",
+    "a_is_baseline": true
+  },
+  {
+    "id": "c009",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both answers correctly explain the var/closure issue and give two fixes; they are equally accurate and complete.",
+    "a_is_baseline": false
+  },
+  {
+    "id": "c010",
+    "baseline_score": 5.0,
+    "routed_score": 5.0,
+    "rationale": "Both answers correctly provide a regex, explanation, and test cases, but B includes a larger set of examples and extra discussion of fullmatch, making it slightly more thorough.",
+    "a_is_baseline": false
+  }
+]

@@ -46,8 +46,8 @@ def test_standard_calls_tier2_model():
 def test_complex_calls_tier3_first():
     with patch("litellm.completion", return_value=ok()) as comp:
         r = call_llm("complex", "hi", 64)
-    assert comp.call_args.kwargs["model"] == "gemini/gemini-3.8-flash"
-    assert r.model == "gemini/gemini-3.8-flash"
+    assert comp.call_args.kwargs["model"] == "openai/qwen/qwen3.8-27b"
+    assert r.model == "openai/qwen/qwen3.8-27b"
     assert r.fallback_triggered is False
 
 
@@ -56,7 +56,7 @@ def test_tier3_rate_limited_retries_3x_then_falls_back(no_sleep_no_cost_db):
     with patch("litellm.completion", side_effect=side) as comp:
         r = call_llm("complex", "hi", 64)
     models = [c.kwargs["model"] for c in comp.call_args_list]
-    assert models == ["gemini/gemini-3.8-flash"] * 3 + ["groq/openai/gpt-oss-120b"]
+    assert models == ["openai/qwen/qwen3.8-27b"] * 3 + ["groq/openai/gpt-oss-120b"]
     assert r.model == "groq/openai/gpt-oss-120b"
     assert r.fallback_triggered is True
     assert [c.args[0] for c in no_sleep_no_cost_db.call_args_list] == [1, 2]  # backoff
@@ -83,7 +83,7 @@ def test_single_model_tier_exhausts_to_gateway_error():
 @pytest.mark.parametrize("tier,model,tin,tout,expected", [
     ("simple", "groq/openai/gpt-oss-20b", 1_000_000, 1_000_000, 0.075 + 0.30),
     ("standard", "gemini/gemini-3.1-flash-lite", 1_000_000, 1_000_000, 0.25 + 1.50),
-    ("complex", "gemini/gemini-3.8-flash", 1_000_000, 1_000_000, 0.75 + 3.75),
+    ("complex", "openai/qwen/qwen3.8-27b", 1_000_000, 1_000_000, 0.80 + 4.0),
 ])
 def test_manual_cost_when_litellm_returns_zero(tier, model, tin, tout, expected):
     with patch("litellm.completion", return_value=ok(tin, tout)):
@@ -103,3 +103,17 @@ def test_litellm_cost_preferred_when_available():
     with patch("litellm.completion", return_value=ok()), \
             patch("litellm.completion_cost", return_value=0.123):
         assert call_llm("simple", "hi", 64).cost_usd == 0.123
+
+
+def test_tier3_passes_groq_openai_compatible_api_base():
+    with patch("litellm.completion", return_value=ok()) as comp:
+        call_llm("complex", "hi", 64)
+    assert comp.call_args.kwargs["api_base"] == "https://api.groq.com/openai/v1"
+
+
+def test_standard_falls_back_to_groq_when_gemini_quota_exhausted():
+    quota = litellm.RateLimitError("daily quota", llm_provider="gemini", model="m")
+    with patch("litellm.completion", side_effect=[quota] * 3 + [ok()]) as comp:
+        r = call_llm("standard", "hi", 64)
+    assert comp.call_count == 4
+    assert (r.model, r.fallback_triggered) == ("groq/openai/gpt-oss-120b", True)

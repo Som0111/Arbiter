@@ -11,7 +11,7 @@ from arbiter.config import ROOT, get_settings
 
 TIER_MODEL_MAP = {
     "simple": ["tier1"],
-    "standard": ["tier2"],
+    "standard": ["tier2", "tier2_fallback"],
     "complex": ["tier3", "tier3_fallback"],
 }
 
@@ -19,7 +19,7 @@ TIER_MODEL_MAP = {
 MANUAL_COST_PER_TOKEN = {
     "groq/openai/gpt-oss-20b": {"in": 0.075e-6, "out": 0.30e-6},
     "gemini/gemini-3.1-flash-lite": {"in": 0.25e-6, "out": 1.50e-6},
-    "gemini/gemini-3.8-flash": {"in": 0.75e-6, "out": 3.75e-6},
+    "openai/qwen/qwen3.8-27b": {"in": 0.80e-6, "out": 4.0e-6},  # Groq-hosted; not in LiteLLM's DB
     "groq/openai/gpt-oss-120b": {"in": 0.15e-6, "out": 0.60e-6},
 }
 
@@ -66,8 +66,11 @@ def _cost(response, model: str, tokens_in: int, tokens_out: int) -> float:
     return tokens_in * rates["in"] + tokens_out * rates["out"] if rates else 0.0
 
 
-def call_llm(tier: str, prompt: str, max_tokens: int) -> LLMResult:
-    aliases = TIER_MODEL_MAP[tier]
+def call_llm(
+    tier: str, prompt: str, max_tokens: int, aliases: list[str] | None = None
+) -> LLMResult:
+    """`aliases` overrides the tier's model chain (e.g. to pin a single model for a baseline)."""
+    aliases = aliases or TIER_MODEL_MAP[tier]
     for alias in aliases:
         params = _model_list()[alias]
         model = params["model"]
@@ -77,6 +80,7 @@ def call_llm(tier: str, prompt: str, max_tokens: int) -> LLMResult:
                 response = litellm.completion(
                     model=model,
                     api_key=_resolve_key(params["api_key"]),
+                    api_base=params.get("api_base"),
                     messages=[{"role": "user", "content": prompt}],
                     max_tokens=max_tokens,
                     timeout=TIMEOUT_S,

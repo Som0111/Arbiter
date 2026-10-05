@@ -1,0 +1,362 @@
+[
+  {
+    "id": "s001",
+    "response": "The active fox leaps over the inactive dog.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 29,
+    "tokens_out": 10,
+    "cost_usd": 6.319999999999999e-05,
+    "latency_ms": 1282.3577999370173
+  },
+  {
+    "id": "s002",
+    "response": "Buenos d\u00edas",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 20,
+    "tokens_out": 5,
+    "cost_usd": 3.5999999999999994e-05,
+    "latency_ms": 146.40889992006123
+  },
+  {
+    "id": "s003",
+    "response": "The capital of France is **Paris**.\n\nIt serves as the political, cultural, and economic heart of the country and is home to many of the world's most famous landmarks, including the Eiffel Tower, the Louvre, and Notre-Dame Cathedral.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 19,
+    "tokens_out": 53,
+    "cost_usd": 0.0002272,
+    "latency_ms": 253.871199907735
+  },
+  {
+    "id": "s004",
+    "response": "04/10/2026",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 32,
+    "tokens_out": 11,
+    "cost_usd": 6.96e-05,
+    "latency_ms": 166.6741999797523
+  },
+  {
+    "id": "s005",
+    "response": "To convert 5 kilometres to miles, we use the standard conversion factor:\n\n$$ 1 \\text{ mile} \\approx 1.60934 \\text{ kilometres} $$\n\nTherefore:\n\n$$ \\text{Miles} = \\frac{\\text{Kilometres}}{1.60934} $$\n\nStep 1: Substitute the value:\n$$ \\text{Miles} = \\frac{5}{1.60934} $$\n\nStep 2: Perform the division:\n$$ \\text{Miles} \\approx 3.106855... $$\n\nStep 3: Round to one decimal place:\nThe digit in the first decimal place is $1$, and the digit immediately following it is $0$. Since $0 < 5$, we do not round up.\n\n$$ \\text{Miles} \\approx 3.1 $$\n\n**Final Answer:**\n5 kilometres is approximately **3.1** miles.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 25,
+    "tokens_out": 213,
+    "cost_usd": 0.0008719999999999999,
+    "latency_ms": 577.794500044547
+  },
+  {
+    "id": "s006",
+    "response": "Negative",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 34,
+    "tokens_out": 2,
+    "cost_usd": 3.5199999999999995e-05,
+    "latency_ms": 151.63169999141246
+  },
+  {
+    "id": "s007",
+    "response": "Photosynthesis is the process by which green plants, algae, and certain bacteria convert light energy, typically from the sun, into chemical energy stored in glucose molecules.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 22,
+    "tokens_out": 33,
+    "cost_usd": 0.00014959999999999998,
+    "latency_ms": 209.84380005393177
+  },
+  {
+    "id": "s008",
+    "response": "Merci",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 20,
+    "tokens_out": 3,
+    "cost_usd": 2.8e-05,
+    "latency_ms": 140.77639998868108
+  },
+  {
+    "id": "s009",
+    "response": "Yes",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 26,
+    "tokens_out": 2,
+    "cost_usd": 2.8799999999999995e-05,
+    "latency_ms": 148.4271000372246
+  },
+  {
+    "id": "s010",
+    "response": "To convert 72 degrees Fahrenheit to Celsius, we use the following formula:\n\n$$ C = \\frac{5}{9}(F - 32) $$\n\n**Step 1: Subtract 32 from the Fahrenheit temperature.**\n$$ 72 - 32 = 40 $$\n\n**Step 2: Multiply the result by $\\frac{5}{9}$.**\n$$ C = \\frac{5}{9} \\times 40 $$\n$$ C = \\frac{200}{9} $$\n\n**Step 3: Perform the division.**\n$$ 200 \\div 9 \\approx 22.222... $$\n\n**Step 4: Round to the nearest degree.**\nSince the decimal part ($.222...$) is less than $.5$, we round down to the nearest whole number.\n$$ 22.222... \\approx 22 $$\n\n**Conclusion:**\n72 degrees Fahrenheit is approximately **22** degrees Celsius.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 27,
+    "tokens_out": 218,
+    "cost_usd": 0.0008935999999999999,
+    "latency_ms": 558.2665000110865
+  },
+  {
+    "id": "s011",
+    "response": "The novel *Pride and Prejudice* was written by **Jane Austen**.\n\nIt was published in 1813 and is one of the most famous works of English literature.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 24,
+    "tokens_out": 41,
+    "cost_usd": 0.0001832,
+    "latency_ms": 226.64529993198812
+  },
+  {
+    "id": "s012",
+    "response": "Lasting for a very short time.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 25,
+    "tokens_out": 9,
+    "cost_usd": 5.6e-05,
+    "latency_ms": 164.04609999153763
+  },
+  {
+    "id": "s013",
+    "response": "Yes",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 25,
+    "tokens_out": 2,
+    "cost_usd": 2.7999999999999996e-05,
+    "latency_ms": 143.85680004488677
+  },
+  {
+    "id": "s014",
+    "response": "The chemical symbol for gold is **Au**.\n\n**Reasoning:**\nThe symbol is derived from the Latin word \"aurum,\" which means gold or \"shining dawn.\" This Latin naming convention was adopted when the periodic table was standardized and remains in use today along with other metals like Silver (Ag, from *argentum*) and Copper (Cu, from *cuprum*).",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 20,
+    "tokens_out": 78,
+    "cost_usd": 0.000328,
+    "latency_ms": 304.7147000906989
+  },
+  {
+    "id": "s015",
+    "response": "Meeting moved to Thursday",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 36,
+    "tokens_out": 5,
+    "cost_usd": 4.8799999999999994e-05,
+    "latency_ms": 151.96090005338192
+  },
+  {
+    "id": "m001",
+    "response": "The Industrial Revolution, originating in late 18th-century Britain, fundamentally shifted production from manual labor to machine-driven factory systems powered by steam. This transition caused rapid urbanization as workers migrated from farms to cities, often facing poor living conditions. Although productivity eventually improved living standards, the era\u2019s initial phase was marked by harsh working conditions, including long hours and child labor. These challenges ultimately led to the introduction of early labor and public health reforms.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 134,
+    "tokens_out": 91,
+    "cost_usd": 0.00047119999999999996,
+    "latency_ms": 585.6684000464156
+  },
+  {
+    "id": "m002",
+    "response": "Mount Kilimanjaro, which is a dormant volcano, has seen its glaciers lose more than 80 percent of their ice since 1912. Consequently, scientists predict that these glaciers could completely disappear within the next few decades.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 120,
+    "tokens_out": 50,
+    "cost_usd": 0.000296,
+    "latency_ms": 251.86429999303073
+  },
+  {
+    "id": "m003",
+    "response": "```javascript\n/**\n * Clamps a value to be within a specified minimum and maximum range.\n * If the value is less than `low`, it returns `low`.\n * If the value is greater than `high`, it returns `high`.\n * Otherwise, it returns the original value.\n *\n * @param {number} value - The value to clamp.\n * @param {number} low - The minimum allowed value.\n * @param {number} high - The maximum allowed value.\n * @returns {number} The clamped value, within the range `[low, high]`.\n */\n```",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 45,
+    "tokens_out": 132,
+    "cost_usd": 0.0005639999999999999,
+    "latency_ms": 381.86029996722937
+  },
+  {
+    "id": "m004",
+    "response": "Although the customer expresses disappointment regarding the delayed delivery and physical damage to the packaging, their overall sentiment is positive. This is because they highly praise the product's audio quality and emphasize the company's prompt and effective customer service, which likely outweighed the initial negative experiences.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 62,
+    "tokens_out": 54,
+    "cost_usd": 0.0002656,
+    "latency_ms": 244.57590002566576
+  },
+  {
+    "id": "m005",
+    "response": "Here are the key points from the paragraph:\n\n*   Remote work expands the talent pool by allowing companies to recruit globally rather than locally.\n*   Time-zone differences and the reduction of spontaneous mentoring pose challenges for real-time collaboration and management.\n*   Employers benefit from reduced office space costs, while employees save commute time.\n*   Employees may face difficulties in maintaining a healthy balance between work and home life.\n*   Many organizations are adopting hybrid work schedules to balance these pros and cons.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 113,
+    "tokens_out": 103,
+    "cost_usd": 0.0005024,
+    "latency_ms": 333.2339000189677
+  },
+  {
+    "id": "m006",
+    "response": "Based on the context provided, here is the outcome for the customer's refund request:\n\n**1. The physical book will not be refunded.**\nAccording to the policy, returns are only allowed if the item is **unused** and in its **original packaging**. Since the customer **opened** the book, it no longer meets the requirement of being \"unused\" or in \"original packaging.\" Therefore, the return for the book itself will be rejected.\n\n**2. The $6 shipping cost will not be refunded.**\nThe policy states that shipping costs are not refunded **unless the item arrived damaged**. There is no mention that the book arrived damaged, only that it was opened. Therefore, the shipping fee is non-refundable.\n\n**Conclusion:**\nThe customer will **not receive a refund** for either the book or the shipping cost. The book is returned without reimbursement because it was opened, and the shipping is non-refundable because the item did not arrive damaged.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 125,
+    "tokens_out": 200,
+    "cost_usd": 0.0009,
+    "latency_ms": 540.1536000426859
+  },
+  {
+    "id": "m007",
+    "response": "```python\ndef parse_port(text):\n    \"\"\"Parse a port number from a string.\n\n    Args:\n        text: A string representing an integer port number.\n\n    Returns:\n        An integer port number in the valid range.\n\n    Raises:\n        ValueError: If `text` is not a valid integer or if the port is\n            outside the range 1-65535 (inclusive).\n    \"\"\"\n```",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 78,
+    "tokens_out": 94,
+    "cost_usd": 0.0004384,
+    "latency_ms": 327.6952001033351
+  },
+  {
+    "id": "m008",
+    "response": "Bees pollinate approximately one-third of human crops, yet global beekeepers report colony losses significantly exceeding historical norms. Researchers attribute this decline to a complex interplay of factors, including the varroa mite, harmful pesticides like neonicotinoids, habitat loss, and climate change-induced shifts in flowering times. Because no single cause accounts for the decrease, conservation efforts now employ an integrated approach. Strategies include restoring wildflower habitats, restricting specific pesticide use, and breeding bee colonies that possess resistance to the varroa mite, aiming to holistically address the multifaceted threats facing bee populations.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 131,
+    "tokens_out": 122,
+    "cost_usd": 0.0005928,
+    "latency_ms": 398.9854999817908
+  },
+  {
+    "id": "m009",
+    "response": "During the day, sunlight travels through a relatively shorter distance in the atmosphere, causing shorter blue wavelengths to scatter in all directions (Rayleigh scattering) and become dominant. As the sun sets, its light must pass through a much thicker layer of atmospheric gas to reach our eyes. This increased path length scatters and removes most of the blue and green wavelengths, leaving the longer-wavelength red and orange light to pass through and illuminate the sky.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 35,
+    "tokens_out": 89,
+    "cost_usd": 0.00038399999999999996,
+    "latency_ms": 303.8203000323847
+  },
+  {
+    "id": "m010",
+    "response": "Based on the text provided, here are the extracted entities categorized into people, organisations, and dates:\n\n**People**\n*   Dr. Elena Ruiz\n*   Prof. James Okoye\n\n**Organisations**\n*   Barcelona Supercomputing Center\n*   NVIDIA\n*   European Commission\n\n**Dates**\n*   12 March 2024\n*   2 May 2024",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 87,
+    "tokens_out": 90,
+    "cost_usd": 0.0004296,
+    "latency_ms": 320.9115999052301
+  },
+  {
+    "id": "m011",
+    "response": "1. **Positive**: The user expresses excitement about improved performance and explicitly praises the developers, indicating satisfaction.\n2. **Negative**: The phrase \"Unacceptable\" and the complaint about repeated crashes clearly convey frustration and dissatisfaction.\n3. **Neutral**: The tweet states factual information about opening hours without expressing any emotion or opinion.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 95,
+    "tokens_out": 67,
+    "cost_usd": 0.000344,
+    "latency_ms": 286.31739993579686
+  },
+  {
+    "id": "m012",
+    "response": "The script remains slow because the Global Interpreter Lock prevents multiple threads from executing Python bytecode in parallel, meaning the CPU-bound work cannot be distributed simultaneously. To achieve true parallel speedup, the workload should be separated into distinct processes using the \"multiprocessing\" module instead of threads.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 128,
+    "tokens_out": 56,
+    "cost_usd": 0.0003264,
+    "latency_ms": 266.7462999233976
+  },
+  {
+    "id": "m013",
+    "response": "```typescript\n/**\n * Performs an HTTP request with automatic retry logic on failure.\n *\n * @param {string} url - The URL to fetch.\n * @param {number} [retries=3] - The maximum number of retry attempts after the initial failure.\n * @param {number} [delayMs=500] - The delay in milliseconds between retry attempts.\n * @returns {Promise<Response>} A Promise that resolves to the Response object if the request succeeds.\n * @throws {Error} If the request fails after all retry attempts have been exhausted.\n */\n```",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 121,
+    "tokens_out": 127,
+    "cost_usd": 0.0006048,
+    "latency_ms": 388.86089995503426
+  },
+  {
+    "id": "m014",
+    "response": "Here are the action items extracted from the meeting notes:\n\n*   **Owner:** Priya  \n    **Action:** Send the revised budget to finance  \n    **Deadline:** Friday\n\n*   **Owner:** Tom  \n    **Action:** Book the venue  \n    **Deadline:** End of next week\n\n*   **Owner:** Marcus  \n    **Action:** Update the project plan (following the client call)  \n    **Deadline:** Wednesday\n\n*   **Owner:** Sara  \n    **Action:** Draft the press release  \n    **Deadline:** Pending budget approval",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 90,
+    "tokens_out": 113,
+    "cost_usd": 0.0005239999999999999,
+    "latency_ms": 364.7042999509722
+  },
+  {
+    "id": "m015",
+    "response": "Microservices decompose applications into small, independent units that allow for autonomous scaling and deployment, thereby preventing single point-of-failure issues. In contrast, monolithic architectures offer greater simplicity in development, testing, and debugging, making them a common starting point for many teams. However, transitioning to microservices introduces significant operational challenges, including network latency, data consistency issues, and a more complex deployment pipeline.\n\nThe main trade-off is sacrificing the inherent simplicity and lower operational overhead of a monolith in exchange for scalability and independent service deployment through microservices.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 131,
+    "tokens_out": 111,
+    "cost_usd": 0.0005488,
+    "latency_ms": 376.41649995930493
+  },
+  {
+    "id": "c001",
+    "response": "```python\ndef merge_intervals(intervals: list[list[int]]) -> list[list[int]]:\n    \"\"\"\n    Merges all overlapping intervals and returns them sorted by start.\n    \n    Args:\n        intervals: A list of intervals, where each interval is a list of two integers [start, end].\n        \n    Returns:\n        A list of merged non-overlapping intervals, sorted by start time.\n    \"\"\"\n    # Handle empty list\n    if not intervals:\n        return []\n    \n    # Sort intervals by start time\n    intervals.sort(key=lambda x: x[0])\n    \n    # Initialize the result with the first interval\n    merged = [intervals[0]]\n    \n    # Iterate through the remaining intervals\n    for current in intervals[1:]:\n        last = merged[-1]\n        # If the current interval overlaps with the last merged interval\n        if current[0] <= last[1]:\n            # Update the end of the last merged interval to the max of both ends\n            last[1] = max(last[1], current[1])\n        else:\n            # No overlap, add the current interval to the merged list\n            merged.append(current)\n    \n    return merged\n\n\n# Example 1:\n# merge_intervals([[1, 3], [2, 6], [8, 10], [15, 18]])\n# Expected output: [[1, 6], [8, 10], [15, 18]]\n\n# Example 2:\n# merge_intervals([[1, 4], [4, 5]])\n# Expected output: [[1, 5]]\n\n# Example 3:\n# merge_intervals([])\n# Expected output: []\n```",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 64,
+    "tokens_out": 378,
+    "cost_usd": 0.0015631999999999998,
+    "latency_ms": 867.8990000626072
+  },
+  {
+    "id": "c002",
+    "response": "```python\nfrom urllib.parse import unquote\n\n\ndef parse_query_string(qs: str) -> dict[str, list[str]]:\n    \"\"\"\n    Parse a URL query string into a dictionary mapping keys to lists of URL-decoded values.\n    \n    Args:\n        qs: The query string to parse (may or may not start with '?')\n        \n    Returns:\n        A dictionary where each key maps to a list of its decoded values.\n        For parameters with no '=' sign (like 'flag'), the value is an empty string.\n        \n    Examples:\n        >>> parse_query_string('a=1&b=2&a=3&c=%20x')\n        {'a': ['1', '3'], 'b': ['2'], 'c': [' x']}\n        >>> parse_query_string('?flag&x=5')\n        {'flag': [''], 'x': ['5']}\n    \"\"\"\n    # Strip leading '?' if present\n    if qs.startswith('?'):\n        qs = qs[1:]\n    \n    if not qs:\n        return {}\n    \n    result: dict[str, list[str]] = {}\n    \n    # Split by '&' to get individual key-value pairs\n    pairs = qs.split('&')\n    \n    for pair in pairs:\n        if not pair:\n            continue\n        \n        # Handle empty strings from consecutive & or leading/trailing &\n        # Check if there's an '=' in the pair\n        if '=' in pair:\n            # Split on the first '=' only\n            key_part, value_part = pair.split('=', 1)\n            key = unquote(key_part)\n            value = unquote(value_part)\n        else:\n            # No '=', so the entire part is the key, and value is empty string\n            key = unquote(pair)\n            value = ''\n        \n        if key in result:\n            result[key].append(value)\n        else:\n            result[key] = [value]\n    \n    return result\n```",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 97,
+    "tokens_out": 427,
+    "cost_usd": 0.0017855999999999998,
+    "latency_ms": 12204.672699910589
+  },
+  {
+    "id": "c003",
+    "response": "```python\nimport httpx\nimport asyncio\nimport json\nfrom typing import Any\n\n\nasync def fetch_json(url: str, retries: int = 3) -> Any:\n    \"\"\"\n    Fetch JSON data from a URL using httpx.AsyncClient.\n    \n    Retries on timeouts and 5xx responses with exponential backoff.\n    Raises immediately on 4xx responses.\n    Returns the parsed JSON.\n    \"\"\"\n    for attempt in range(retries + 1):\n        try:\n            async with httpx.AsyncClient(timeout=10.0) as client:\n                response = await client.get(url)\n                \n                # Raise on 4xx immediately (no retry)\n                if response.status_code >= 400 and response.status_code < 500:\n                    raise httpx.HTTPStatusError(\n                        f\"Client error: {response.status_code}\",\n                        request=response.request,\n                        response=response,\n                    )\n                \n                # Retry on 5xx\n                if response.status_code >= 500:\n                    if attempt < retries:\n                        await asyncio.sleep(2 ** attempt)\n                        continue\n                    else:\n                        raise httpx.HTTPStatusError(\n                            f\"Server error: {response.status_code}\",\n                            request=response.request,\n                            response=response,\n                        )\n                \n                # If we get here, status code is 2xx or 3xx (assume 2xx for JSON)\n                return response.json()\n                \n        except (httpx.TimeoutException, httpx.ConnectError):\n            # Retry on timeouts and connection errors\n            if attempt < retries:\n                await asyncio.sleep(2 ** attempt)\n                continue\n            else:\n                raise\n\n\n# Usage example\nasync def main():\n    try:\n        data = await fetch_json(\"https://jsonplaceholder.typicode.com/todos/1\")\n        print(data)\n    except httpx.HTTPStatusError as e:\n        print(f\"HTTP error: {e.response.status_code}\")\n    except httpx.TimeoutException:\n        print(\"Request timed out after retries\")\n\n\nif __name__ == \"__main__\":\n    asyncio.run(main())\n```",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 75,
+    "tokens_out": 467,
+    "cost_usd": 0.0019279999999999998,
+    "latency_ms": 24232.516600051895
+  },
+  {
+    "id": "c004",
+    "response": "Here is the step-by-step reasoning and solution to determine when and where the two trains meet.\n\n### 1. Identify Given Variables\n\n*   **Distance between City A and City B ($D$):** $420$ km\n*   **Train 1 (from A):**\n    *   Departure Time: 9:00\n    *   Speed ($v_1$): $80$ km/h\n*   **Train 2 (from B):**\n    *   Departure Time: 10:00\n    *   Speed ($v_2$): $100$ km/h\n\n### 2. Calculate Distance Covered by Train 1 Before Train 2 Departs\n\nSince Train 1 leaves at 9:00 and Train 2 leaves at 10:00, Train 1 travels alone for the first hour.\n\n*   **Time difference ($\\Delta t$):** $10:00 - 9:00 = 1$ hour.\n*   **Distance traveled by Train 1 in that hour ($d_1$):**\n    $$ d_1 = v_1 \\times \\Delta t = 80 \\text{ km/h} \\times 1 \\text{ h} = 80 \\text{ km} $$\n\nAt 10:00, Train 1 is 80 km away from City A.\nThe remaining distance between Train 1 and Train 2 at 10:00 is:\n$$ D_{\\text{remaining}} = 420 \\text{ km} - 80 \\text{ km} = 340 \\text{ km} $$\n\n### 3. Calculate Time Until They Meet After 10:00\n\nFrom 10:00 onwards, both trains are moving toward each other. We can calculate the time it takes for them to cover the remaining 340 km using their **relative speed**.\n\n*   **Relative Speed ($v_{\\text{rel}}$):** Since they are moving toward each other, we add their speeds.\n    $$ v_{\\text{rel}} = v_1 + v_2 = 80 \\text{ km/h} + 100 \\text{ km/h} = 180 \\text{ km/h} $$\n\n*   **Time to meet after 10:00 ($t_2$):**\n    $$ t_2 = \\frac{D_{\\text{remaining}}}{v_{\\text{rel}}} = \\frac{340 \\text{ km}}{180 \\text{ km/h}} $$\n\n    Simplifying the fraction:\n    $$ t_2 = \\frac{34}{18} \\text{ hours} = \\frac{17}{9} \\text{ hours} $$\n\n*   **Convert $\\frac{17}{9}$ hours into minutes:**\n    $$ \\frac{17}{9} \\text{ hours} = 1 \\text{ hour} + \\frac{8}{9} \\text{ hours} $$\n    $$ \\frac{8}{9} \\text{ hours} \\times 60 \\text{ minutes/hour} = \\frac{480}{9} \\approx 53.33 \\text{ minutes} $$\n\n    So, the time after 10:00 is **1 hour and 53.33 minutes** (or exactly 1 hour and $53\\frac{1}{3}$ minutes).\n\n### 4. Determine the Meeting Time\n\nAdd the calculated time ($t_2$) to the start time of the second phase (10:00).\n\n*   Start Time: 10:00\n*   Add 1 hour: 11:00\n*   Add 53.33 minutes: 11:53.33\n\n**Meeting Time:** **11:53 and 20 seconds** (since $0.33$ minutes $\\times 60$ seconds = 20 seconds).\n\n### 5. Determine the Location Relative to City A\n\nTo find the distance from City A, we calculate the total distance Train 1 has traveled from 9:00 until the meeting time.\n\n*   **Total time Train 1 has traveled ($T_1$):**\n    Train 1 started at 9:00 and they met $1\\frac{17}{9}$ hours after 10:00.\n    $$ T_1 = 1 \\text{ hour (before 10:00)} + \\frac{17}{9} \\text{ hours (after 10:00)} $$\n    $$ T_1 = 1 + 1 + \\frac{8}{9} = 2\\frac{8}{9} \\text{ hours} = \\frac{26}{9} \\text{ hours} $$\n\n*   **Distance from City A ($D_A$):**\n    $$ D_A = v_1 \\times T_1 = 80 \\text{ km/h} \\times \\frac{26}{9} \\text{ h} $$\n    $$ D_A = \\frac{2080}{9} \\text{ km} $$\n    $$ D_A \\approx 231.11 \\text{ km} $$\n\n*(Alternatively, we can calculate distance from B and subtract from total distance to verify:\nDistance from B = $100 \\text{ km/h} \\times \\frac{17}{9} \\text{ h} = \\frac{1700}{9} \\text{ km} \\approx 188.89 \\text{ km}$.\nDistance from A = $420 - 188.89 = 231.11 \\text{ km}$.)*\n\n### Final Answer\n\n*   **Time they meet:** **11:53:20** (11:53 and 20 seconds)\n*   **Distance from City A:** **231.11 km** (or exactly $\\frac{2080}{9}$ km)\n\n---\n\n### Verification\n\nLet's check if the sum of the distances traveled by both trains equals the total distance between the cities (420 km).\n\n1.  **Distance traveled by Train 1:**\n    *   Time traveled: $2\\frac{8}{9}$ hours.\n    *   Distance: $80 \\times \\frac{26}{9} = \\frac{2080}{9}$ km.\n\n2.  **Distance traveled by Train 2:**\n    *   Time traveled: $1\\frac{8}{9}$ hours (or $\\frac{17}{9}$ hours).\n    *   Distance: $100 \\times \\frac{17}{9} = \\frac{1700}{9}$ km.\n\n3.  **Total Distance:**\n    $$ \\text{Total} = \\frac{2080}{9} + \\frac{1700}{9} = \\frac{3780}{9} $$\n    $$ \\frac{3780}{9} = 420 \\text{ km} $$\n\nThe total distance matches the distance between City A and City B. The calculation is correct.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 94,
+    "tokens_out": 1605,
+    "cost_usd": 0.0064952,
+    "latency_ms": 26464.99110001605
+  },
+  {
+    "id": "c005",
+    "response": "Here is the step-by-step solution to determine how many pens and notebooks were bought.\n\n### Step 1: Define Variables\n\nLet $p$ be the number of pens bought.\nLet $n$ be the number of notebooks bought.\n\n### Step 2: Set Up the Equations\n\nWe have two pieces of information that can be translated into linear equations:\n\n1.  **Total number of items:** The customer buys 12 items in total.\n    $$p + n = 12$$\n\n2.  **Total cost:** Pens cost $\\$1.20$ and notebooks cost $\\$3.50$, and the total spent is $\\$26.40$.\n    $$1.20p + 3.50n = 26.40$$\n\nWe also have the constraint that $p \\ge 1$ and $n \\ge 1$.\n\n### Step 3: Solve the System of Equations\n\nWe can solve this system using the substitution method.\n\nFrom the first equation, express $p$ in terms of $n$:\n$$p = 12 - n$$\n\nSubstitute this expression for $p$ into the second equation:\n$$1.20(12 - n) + 3.50n = 26.40$$\n\nNow, solve for $n$:\n\n1.  Distribute $1.20$:\n    $$14.40 - 1.20n + 3.50n = 26.40$$\n\n2.  Combine like terms ($-1.20n + 3.50n$):\n    $$14.40 + 2.30n = 26.40$$\n\n3.  Subtract $14.40$ from both sides:\n    $$2.30n = 26.40 - 14.40$$\n    $$2.30n = 12.00$$\n\n4.  Divide by $2.30$:\n    $$n = \\frac{12.00}{2.30}$$\n    $$n = \\frac{120}{23}$$\n\n$$n \\approx 5.217$$\n\n### Step 4: Analyze the Result\n\nThe value for $n$ is approximately $5.217$. Since it is impossible to buy a fraction of a notebook, **there is no integer solution** to this system of equations as stated.\n\nLet's double-check the calculations to ensure no arithmetic errors were made.\n*   Equation 1: $p + n = 12$\n*   Equation 2: $1.2p + 3.5n = 26.4$\n*   Multiply Eq 1 by 1.2: $1.2p + 1.2n = 14.4$\n*   Subtract from Eq 2: $(3.5n - 1.2n) = 26.4 - 14.4$\n*   $2.3n = 12$\n*   $n = 12 / 2.3 \\approx 5.22$\n\nThe math holds. The problem as currently written contains inconsistent data that results in a non-integer number of items.\n\n**However**, in many such textbook problems, there is often a slight typo in the total cost or the price of an item. Let's look for the most likely intended integer solution near these values.\n\nIf we test integer values for $n$ close to $5.22$ (i.e., $n=5$ and $n=6$), we can see which one the problem likely intended.\n\n**Case A: 5 Notebooks**\nIf $n = 5$, then $p = 12 - 5 = 7$.\nTotal Cost = $7(1.20) + 5(3.50) = 8.40 + 17.50 = 25.90$\n(This is $\\$0.50$ less than the stated $\\$26.40$)\n\n**Case B: 6 Notebooks**\nIf $n = 6$, then $p = 12 - 6 = 6$.\nTotal Cost = $6(1.20) + 6(3.50) = 7.20 + 21.00 = 28.20$\n(This is $\\$1.80$ more than the stated $\\$26.40$)\n\n**Case C: Could the total cost be different?**\nIf $n=5$ and $p=7$, cost is $\\$25.90$.\nIf $n=6$ and $p=6$, cost is $\\$28.20$.\n\n**Case D: Could the price of the pen be different?**\nIf $n=5, p=7$, and total is $\\$26.40$:\n$1.70 \\times 7? No.\n$1.20 \\times 7 = 8.40. $26.40 - 8.40 = 18.00. $18.00 / 5 = 3.60$.\nIf notes were $\\$3.60$, the answer would be 7 pens and 5 notebooks.\n\n**Case E: Could the price of the notebook be different?**\nIf $n=5, p=7$, and total is $\\$26.40$:\n$1.20 \\times 7 = 8.40$.\n$26.40 - 8.40 = 18.00$.\nPrice per notebook = $18.00 / 5 = 3.60$.\n\nSince $\\$3.60$ is a very similar price to $\\$3.50$, it is highly probable that there is a typo in the problem statement regarding the price of the notebook or the total sum.\n\n**Strict Answer:**\nBased on the exact numbers provided in your request, **it is mathematically impossible** to buy whole numbers of pens and notebooks that satisfy these conditions. The calculated number of notebooks is $5.217$.\n\n**Likely Intended Answer (Assuming a minor typo):**\nIf we assume the question intended for there to be a solution, the values **7 pens and 5 notebooks** are the closest valid integer combination, but they cost $\\$25.90$, not $\\$26.40$.\n\nIf we assume the total cost was meant to be **$25.90**, the answer is:\n**7 pens and 5 notebooks**.\n\nIf we assume the notebook price was meant to be **$3.60**, the answer is:\n**7 pens and 5 notebooks**.\n\n### Final Conclusion\n\nStrictly speaking, **there is no solution** because the prices and total cost yield a non-integer result ($5.217$ notebooks).\n\nHowever, if you must provide the most probable intended answer for a standard word problem, it is likely:\n**7 Pens and 5 Notebooks** (with a note that the total cost should actually be $\\$25.90$ or the notebook price should be $\\$3.60$).",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 86,
+    "tokens_out": 1608,
+    "cost_usd": 0.006500799999999999,
+    "latency_ms": 3565.7742000184953
+  },
+  {
+    "id": "c006",
+    "response": "Concurrency in database systems refers to the ability to handle multiple transactions simultaneously without compromising data integrity. The two primary strategies for managing this are Optimistic Concurrency Control (OCC) and Pessimistic Concurrency Control (PCC). While both aim to prevent race conditions and ensure isolation, they differ fundamentally in their approach to locking and validation.\n\n**How They Work**\nPessimistic Concurrency Control assumes that conflicts between transactions are likely. Therefore, it locks data resources\u2014typically using row-level or table-level locks\u2014as soon as a transaction begins to read or write data. Other transactions must wait until these locks are released, either upon a commit or a rollback. This is a proactive strategy that prevents conflicts by serializing access.\n\nIn contrast, Optimistic Concurrency Control assumes that conflicts are rare. It allows transactions to read and modify data without locking it. Instead, each transaction maintains a version number or timestamp. The conflict check occurs only at the end of the transaction, during the commit phase. If the system detects that another transaction has modified the data since the first transaction started, the conflict is resolved.\n\n**Failure Modes**\nThe primary failure mode for PCC is **deadlock**. Since transactions hold locks throughout their execution, two transactions can wait indefinitely for each other to release resources. Databases employ deadlock detection algorithms (like wait-for graphs) to identify and abort one of the conflicting transactions. Furthermore, excessive locking can lead to lock contention, where many threads are blocked, reducing system throughput.\n\nThe main failure mode for OCC is a **conflict abort**. If a validation check fails at commit time, the entire transaction must be rolled back and restarted. While this avoids deadlocks, it can lead to \"livelock\" in extreme cases, where transactions are continuously aborted and restarted, making no forward progress. Additionally, the memory overhead to store version information and validate changes can become significant.\n\n**Performance Under Contention**\nUnder **low contention**, OCC generally outperforms PCC. Because it avoids the overhead of acquiring, checking, and releasing locks, transactions complete faster with lower latency. PCC in low-contention scenarios still incurs the cost of lock management, which is often unnecessary.\n\nConversely, under **high contention**, PCC is typically more efficient. While it serializes access, it prevents the massive wave of transaction aborts that OCC suffers. In an OCC system with high contention, a large percentage of transactions will fail validation and require costly restarts, leading to wasted CPU cycles and I/O. PCC, by using locks, allows the database to manage the queue of requests more predictably, ensuring that while throughput may drop, the system remains stable and progresses.\n\n**Concrete Use Cases**\n*   **PCC is better for financial transactions (e.g., bank account transfers).** Here, data integrity is paramount, and conflicts, while possible, are manageable. The cost of a failed transaction is high, and the system prefers to wait briefly for a lock rather than risk data inconsistency. The low-volume, high-accuracy nature of banking makes the lock overhead acceptable.\n*   **OCC is better for high-read, low-write analytics dashboards or e-commerce cart updates.** Consider an e-commerce site where thousands of users view product pages (reads) but only a subset attempt to add items to a cart (writes). OCC allows the vast majority of read-heavy traffic to proceed without blocking, while the infrequent write conflicts are handled by retrying only the small number of conflicting transactions. This maximizes throughput for the general user base.\n\nIn summary, the choice between OCC and PCC is a trade-off between latency and throughput in specific environments. Developers must profile their application\u2019s read/write ratio and expected conflict rate to select the appropriate strategy.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 63,
+    "tokens_out": 769,
+    "cost_usd": 0.0031263999999999997,
+    "latency_ms": 2871.751100057736
+  },
+  {
+    "id": "c007",
+    "response": "Choosing between REST and GraphQL for a mobile app backend is a critical architectural decision that impacts development speed, network efficiency, and long-term maintainability. While REST (Representational State Transfer) has been the industry standard for years, GraphQL has emerged as a powerful alternative, particularly for complex, data-rich mobile applications. To determine the best fit, we must examine their key differences across several dimensions.\n\n**Over-fetching and Under-fetching**\nThe most significant pain point in REST is rigid data structures. With REST, an endpoint typically returns a fixed set of fields. This often leads to **over-fetching**, where the client receives more data than necessary, wasting bandwidth on a crucial mobile resource. Conversely, it can lead to **under-fetching**, forcing the client to make multiple sequential HTTP requests to gather all required data for a single screen. GraphQL solves both issues by allowing the client to specify exactly which fields it needs in a single request. This precision reduces payload size and eliminates the waterfall effect of multiple API calls, significantly improving mobile app performance.\n\n**Caching and Versioning**\nREST benefits from HTTP caching mechanisms (ETags, Cache-Control), which are native to browsers and proxies. GraphQL, being a single endpoint, does not leverage HTTP caching as effectively; instead, it relies on client-side caching strategies (like Relay or Apollo Client), which requires additional frontend engineering effort. Regarding versioning, REST typically handles this explicitly via URL versions (e.g., `/v1/user`), making it simple for clients to know what they are interacting with. GraphQL uses additive versioning, where fields are deprecated rather than removed, ensuring backward compatibility but requiring clients to handle potential nulls or changes in logic.\n\n**Tooling, Error Handling, and Security**\nREST is widely supported by existing infrastructure and tools, making debugging and monitoring straightforward. GraphQL offers superior tooling for development, such as IDE-integrated documentation and schema validation, which reduces the need for manual API documentation. However, error handling in GraphQL is more complex, as errors can be schema-level (validation) or execution-level (runtime) and may coexist within a single success response. Security is a major concern for GraphQL; the Query Depth limit is essential to prevent denial-of-service attacks via complex queries, and permission checking must be enforced at the resolver level, not just the endpoint level, as any field can potentially be requested.\n\n**Recommendation**\nFor a mobile app with complex UI requirements, diverse data sources, or frequent feature iterations, **GraphQL is the superior choice**. It minimizes network overhead and accelerates development by decoupling frontend and backend needs. However, if your backend is a simple CRUD service, serves a limited set of endpoints, or requires extensive use of standard HTTP caching for public-facing read-heavy data, **REST remains the practical and efficient solution**. Choose GraphQL when data flexibility and reducing API bloat are paramount; stick with REST when simplicity and standard caching protocols are your primary priorities.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 70,
+    "tokens_out": 602,
+    "cost_usd": 0.002464,
+    "latency_ms": 2716.855700011365
+  },
+  {
+    "id": "c008",
+    "response": "The bug is in the update statements within the loop: `a = b` executes **before** `b = a + b` uses the old value of `a`. This overwrites `a` prematurely, causing `b = a + b` to use the newly assigned (same-old-`b`) value for `a` instead of the previous `a`. As a result, the sequence doesn\u2019t evolve correctly.\n\n**Corrected version:**\n\n```python\ndef fib(n):\n    a, b = 0, 1\n    for _ in range(n):\n        a, b = b, a + b  # Python evaluates RHS fully before assigning\n    return a\n```\n\nUsing simultaneous assignment ensures both `a` and `b` are updated from their previous values in one step.\n\n**Short test:**\n\n```python\nprint(fib(0))  # 0\nprint(fib(1))  # 1\nprint(fib(2))  # 1\nprint(fib(5))  # 5\nprint(fib(10)) # 55\n```\n\nOutput:\n```\n0\n1\n1\n5\n55\n```",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 88,
+    "tokens_out": 252,
+    "cost_usd": 0.0010784,
+    "latency_ms": 1854.2700000107288
+  },
+  {
+    "id": "c009",
+    "response": "## The Bug\n\nThe code prints:\n\n```\n3\n3\n3\n```\n\ninstead of the expected:\n\n```\n0  (after 0s)\n1  (after 1s)\n2  (after 2s)\n```\n\n> **Note:** The actual delays are also wrong. `1000 * i` gives delays of `0ms`, `1000ms`, and `2000ms`, but since all three timeouts reference the **same** `i`, and by the time any callback fires, the loop has already finished, `i` is always **3**.\n\n---\n\n## Root Cause: Scoping and Closures\n\n1. **`var` is function-scoped (or globally scoped if at the top level)**, not block-scoped. So there is only **one** variable `i` for the entire loop.\n\n2. **Closures capture variables, not values.** The anonymous function passed to `setTimeout` forms a **closure** that references the *same* `i` variable in the outer scope \u2014 it does not create a copy of its value at the time the callback is created.\n\n3. By the time any of the `setTimeout` callbacks execute (asynchronously), the `for` loop has already completed. The last assignment was `i = 3` (when the condition `i < 3` failed). So every callback reads `i === 3`.\n\n### Step-by-step execution:\n\n| Step | What happens |\n|------|-------------|\n| 1 | `i = 0`, timeout `f(0)` scheduled with delay `0ms`, references shared `i` |\n| 2 | `i = 1`, timeout `f(1)` scheduled with delay `1000ms`, references shared `i` |\n| 3 | `i = 2`, timeout `f(2)` scheduled with delay `2000ms`, references shared `i` |\n| 4 | `i = 3`, loop condition `3 < 3` is false, loop exits |\n| After 0ms | Callback 1 runs: logs `i` \u2192 `3` |\n| After 1000ms | Callback 2 runs: logs `i` \u2192 `3` |\n| After 2000ms | Callback 3 runs: logs `i` \u2192 `3` |\n\n---\n\n## Fix 1: Use `let` (Block Scoping)\n\n`let` creates a **new binding** for `i` in each iteration of the loop. Each closure captures its **own** `i`.\n\n```javascript\nfor (let i = 0; i < 3; i++) {\n  setTimeout(function () {\n    console.log(i);\n  }, 1000 * i);\n}\n```\n\n**Why it works:** `let` is block-scoped. Each loop iteration gets a fresh `i`. The closure inside the callback references the `i` specific to that iteration. Output: `0`, `1`, `2` (at 0ms, 1000ms, 2000ms respectively).\n\n---\n\n## Fix 2: Create a Closure Per Iteration via an IIFE\n\nBefore `let` was available, developers used an **Immediately Invoked Function Expression (IIFE)** to create a new scope for each iteration, passing the current value of `i` as a parameter.\n\n```javascript\nfor (var i = 0; i < 3; i++) {\n  (function (j) {\n    setTimeout(function () {\n      console.log(j);\n    }, 1000 * j);\n  })(i);\n}\n```\n\n**Why it works:**\n- The IIFE `(function (j) { ... })(i)` is called immediately on each iteration.\n- The parameter `j` receives the **current value** of `i` (a primitive number, so it's copied by value).\n- Each invocation of the IIFE creates a **new function scope** with its own `j`.\n- The inner `setTimeout` callback closes over that iteration's specific `j`, not the shared `i`.\n- As `i` changes in the next iteration, previous `j` values remain unchanged.\n\nOutput: `0`, `1`, `2` (at 0ms, 1000ms, 2000ms).\n\n---\n\n## Bonus Fix (Modern): Use `Array.from` or `forEach`\n\n```javascript\n[0, 1, 2].forEach(function (i) {\n  setTimeout(function () {\n    console.log(i);\n  }, 1000 * i);\n});\n```\n\n`forEach` passes each element as a parameter to the callback, creating a new scope per invocation \u2014 similar to the IIFE approach but cleaner.\n\n---\n\n## Summary\n\n| Issue | Explanation |\n|-------|-------------|\n| `var` hoisting to function scope | One shared `i` across all iterations |\n| Closures capture variables, not values | Callbacks read `i` *at execution time*, which is after the loop ends |\n| Fix with `let` | New binding per iteration \u2192 each closure gets its own `i` |\n| Fix with IIFE | New function scope per iteration \u2192 parameter `j` holds the captured value |",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 92,
+    "tokens_out": 1154,
+    "cost_usd": 0.0046895999999999995,
+    "latency_ms": 2379.308900097385
+  },
+  {
+    "id": "c010",
+    "response": "# Valid IPv4 Address Regular Expression\n\n## The Pattern\n\n```regex\n^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$\n```\n\nThis is hard to read when repeated four times. A cleaner approach uses a defined octet pattern:\n\n```\nOCTET = (25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\n```\n\nThen the full pattern becomes:\n\n```\n^OCTET\\.OCTET\\.OCTET\\.OCTET$\n```\n\n## Explanation of the Octet Pattern\n\nThe octet must match a number from **0 to 255** with **no leading zeros** (except `\"0\"` itself). We break this into four alternative cases:\n\n| Alternative | Matches | Examples |\n|---|---|---|\n| `25[0-5]` | 250\u2013255 | `250`, `255` |\n| `2[0-4][0-9]` | 200\u2013249 | `200`, `249` |\n| `1[0-9][0-9]` | 100\u2013199 | `100`, `199` |\n| `[1-9]?[0-9]` | 0\u201399, no leading zeros | `0`, `1`, `42`, `99` |\n\n### Detailed breakdown of each alternative:\n\n1. **`25[0-5]`** \u2013 Covers **250\u2013255**. The third digit is restricted to 0\u20135 to stay \u2264 255.\n2. **`2[0-4][0-9]`** \u2013 Covers **200\u2013249**. The second digit is 0\u20134, third is 0\u20139.\n3. **`1[0-9][0-9]`** \u2013 Covers **100\u2013199**. The first digit is fixed at 1, the other two are 0\u20139.\n4. **`[1-9]?[0-9]`** \u2013 Covers **0\u201399** while preventing leading zeros:\n   - The optional `[1-9]?` matches a single non-zero digit if present.\n   - The trailing `[0-9]` matches the last digit (0\u20139).\n   - If no leading digit, it matches a single digit.\n   - If a leading digit is present, it can't be `0` (thus no `\"01\"`, `\"001\"`, etc.).\n\n### Full pattern structure:\n- `^` \u2014 start of string anchor.\n- Four OCTET groups separated by `\\.` (escaped dots to match literal periods).\n- `$` \u2014 end of string anchor.\n\n## Python Snippet with Assertions\n\n```python\nimport re\n\n# Build the regex with a named group for the octet for clarity\noctet = r'(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])'\nipv4_pattern = rf'^{octet}\\.{octet}\\.{octet}\\.{octet}$'\n\n# Compile the pattern\nipv4_re = re.compile(ipv4_pattern)\n\n# --- Strings that SHOULD match (valid IPv4 addresses) ---\nvalid_addresses = [\n    \"0.0.0.0\",\n    \"192.168.1.1\",\n    \"255.255.255.255\",\n    \"100.100.100.100\",\n    \"0.0.0.1\",\n    \"1.2.3.4\",\n    \"250.249.199.42\",\n]\n\n# --- Strings that SHOULD NOT match (invalid IPv4 addresses) ---\ninvalid_addresses = [\n    \"256.1.1.1\",       # 256 is out of range\n    \"1.2.3.999\",       # 999 is out of range\n    \"192.168.01.1\",    # leading zero in an octet (01)\n    \"192.168.1.01\",    # leading zero in an octet (01)\n    \"01.2.3.4\",        # leading zero\n    \"1.2.3\",           # only 3 octets\n    \"1.2.3.4.5\",       # too many octets\n    \"192.168.1.\",      # missing last octet\n    \"a.b.c.d\",         # non-numeric\n    \"192.168.1.1 \",    # trailing space\n    \" 192.168.1.1\",    # leading space\n    \"-1.2.3.4\",        # negative number\n    \"00.0.0.0\",        # leading zero\n    \"1.2.3.05\",        # leading zero\n]\n\n# Assert all valid addresses match\nfor addr in valid_addresses:\n    assert ipv4_re.match(addr), f'Expected MATCH but got no match: \"{addr}\"'\n\n# Assert all invalid addresses do NOT match\nfor addr in invalid_addresses:\n    assert not ipv4_re.match(addr), f'Expected NO MATCH but got a match: \"{addr}\"'\n\nprint(\"All assertions passed! The regex correctly validates IPv4 addresses.\")\n```\n\n### Running the snippet\n\n```\n$ python ipv4_test.py\nAll assertions passed! The regex correctly validates IPv4 addresses.\n```\n\n## Using `re.fullmatch` as an Alternative\n\nNote that using `re.fullmatch()` eliminates the need for `^` and `$` anchors:\n\n```python\nipv4_re = re.compile(\n    r'(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\.'\n    r'(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\.'\n    r'(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\.'\n    r'(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])'\n)\n\n# Then use: ipv4_re.fullmatch(\"192.168.1.1\") is not None\n```\n\nThis is functionally equivalent but makes the intent clearer that the **entire** string must match.",
+    "model": "openai/qwen/qwen3.8-27b",
+    "tokens_in": 75,
+    "tokens_out": 1685,
+    "cost_usd": 0.0068,
+    "latency_ms": 3450.856199953705
+  }
+]
