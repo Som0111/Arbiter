@@ -6,7 +6,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-from arbiter.router import MANUAL_COST_PER_TOKEN, _model_list
+from arbiter.router import model_list, token_cost
 
 TIERS = ["simple", "standard", "complex"]
 COLORS = {"simple": "#2a9d8f", "standard": "#e9c46a", "complex": "#e76f51"}
@@ -33,8 +33,7 @@ def load_logs(path: str) -> pd.DataFrame:
 
 def premium_cost(row) -> float:
     """What this request would have cost on the tier-3 model."""
-    rates = MANUAL_COST_PER_TOKEN[_model_list()["tier3"]["model"]]
-    return row["tokens_in"] * rates["in"] + row["tokens_out"] * rates["out"]
+    return token_cost(model_list()["tier3"], row["tokens_in"], row["tokens_out"])
 
 
 st.title("Arbiter — routing cost dashboard")

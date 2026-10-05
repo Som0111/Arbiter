@@ -122,7 +122,7 @@ This is the brain of the routing decision. It works in two steps:
 - Rules cover ~70% of cases
 
 **Step 2 — ML Classifier (runs when rules are ambiguous):**
-- A simple logistic regression model trained on the 40 benchmark tasks
+- A simple logistic regression model trained on 60 separate hand-written examples (`data/classifier_train.json`), none of which appear in the benchmark
 - Features: token count, has code keywords, has reasoning keywords, sentence count
 - This is not a neural network — it's a ~5KB scikit-learn model saved as a `.pkl` file
 - Runs in <1ms locally
@@ -306,7 +306,7 @@ Without tenant isolation, a cached answer from one tenant could leak to another.
 LiteLLM gives every provider the same interface. Adding a new provider (e.g., Mistral, Cohere) means adding a line to the config file, not rewriting API code. It also handles retries, fallbacks, and cost tracking in one place.
 
 ### Why not a neural classifier for tier detection?
-The benchmark has 40 examples. A neural classifier trained on 40 examples would overfit badly. Logistic regression on handcrafted features generalises better at this scale. More importantly, the classifier runs locally — no API call, no latency, no cost.
+The classifier has only 60 training examples. A neural classifier trained on 60 examples would overfit badly. Logistic regression on handcrafted features generalises better at this scale. More importantly, the classifier runs locally — no API call, no latency, no cost.
 
 ---
 
@@ -315,7 +315,7 @@ The benchmark has 40 examples. A neural classifier trained on 40 examples would 
 1. **Render free tier sleeps** after 15 minutes of inactivity. The first request after a sleep takes ~20–30 seconds to respond.
 2. **Logs reset on Render restart** because free tier has ephemeral storage. Fix in production: mount a volume or point logs to an external store.
 3. **Cache is in-memory** — it resets on server restart. In production, Redis (e.g. Upstash free tier) would persist it.
-4. **Classifier trained on 40 examples** — unusual prompt styles may be misclassified.
+4. **Classifier trained on 60 examples (70% cross-validated accuracy)** — unusual prompt styles may be misclassified.
 5. **Free-tier quotas** — Gemini allows only ~15 requests/day per model on the free tier, and Groq ~8k tokens/minute. Under real load the gateway leans on its fallbacks; a real deployment needs paid accounts.
 
 ---
@@ -323,7 +323,7 @@ The benchmark has 40 examples. A neural classifier trained on 40 examples would 
 ## Common Interview Questions
 
 **Q: How does the router decide which model to use?**
-A: In order: (1) count tokens, (2) check for code/complexity keywords, (3) if ambiguous, run a logistic regression classifier trained on 40 labeled examples. Tenant tier caps are applied last as a hard override.
+A: In order: (1) count tokens, (2) check for code/complexity keywords, (3) if ambiguous, run a logistic regression classifier trained on 60 labeled examples that are kept separate from the benchmark. Tenant tier caps are applied last as a hard override.
 
 **Q: What happens when the premium model is rate-limited?**
 A: The router catches `RateLimitError`, backs off exponentially (1s, 2s, 4s), retries up to 3 times. If all retries fail, it falls through to the next model in the fallback chain. If all models are exhausted, the API returns 503.

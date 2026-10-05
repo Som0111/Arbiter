@@ -10,7 +10,7 @@ import uuid
 from datetime import UTC, datetime, timedelta
 
 from arbiter.logger import RequestLog, log_path, write_log
-from arbiter.router import MANUAL_COST_PER_TOKEN, TIER_MODEL_MAP, _model_list
+from arbiter.router import TIER_MODEL_MAP, model_list, token_cost
 
 TENANTS = ["tenant_a", "tenant_b", "tenant_test"]
 LATENCY_MS = {"simple": (200, 900), "standard": (500, 2500), "complex": (1200, 7000)}
@@ -18,13 +18,12 @@ LATENCY_MS = {"simple": (200, 900), "standard": (500, 2500), "complex": (1200, 7
 
 def make_entry(rng: random.Random, now: datetime) -> RequestLog:
     tier = rng.choices(["simple", "standard", "complex"], weights=[8, 8, 4])[0]
-    model = _model_list()[TIER_MODEL_MAP[tier][0]]["model"]
-    fallback = tier == "complex" and rng.random() < 0.15
-    if fallback:
-        model = _model_list()[TIER_MODEL_MAP[tier][1]]["model"]
+    chain = TIER_MODEL_MAP[tier]
+    fallback = len(chain) > 1 and rng.random() < 0.15
+    params = model_list()[chain[1] if fallback else chain[0]]
+    model = params["model"]
     tokens_in, tokens_out = rng.randint(10, 600), rng.randint(5, 700)
-    rates = MANUAL_COST_PER_TOKEN[model]
-    cost = tokens_in * rates["in"] + tokens_out * rates["out"]
+    cost = token_cost(params, tokens_in, tokens_out)
     hit = rng.random() < 0.15
     ts = now - timedelta(minutes=rng.randint(0, 24 * 60))
     return RequestLog(

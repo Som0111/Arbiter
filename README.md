@@ -28,29 +28,40 @@ flowchart TD
 | standard | Gemini `3.1-flash-lite` | Groq `gpt-oss-120b` |
 | complex | Groq `qwen3.8-27b` | Groq `gpt-oss-120b` |
 
-Embeddings for the cache: Gemini `gemini-embedding-001`. The tier-to-model mapping lives in `config/litellm_config.yaml` and `src/arbiter/router.py`.
+Embeddings for the cache: Gemini `gemini-embedding-001`. Model names **and prices** live in `config/litellm_config.yaml` (the app refuses to start if a model has no pricing); the tier-to-fallback-chain mapping is in `src/arbiter/router.py`.
 
 ## Key results
 
-40 benchmark tasks (15 simple / 15 standard / 10 complex), each run once through the all-premium baseline (every task on the tier-3 model) and once through the gateway, then scored 1-5 by an LLM judge. Costs are estimated at list prices. Full report: [`reports/EVAL_REPORT.md`](reports/EVAL_REPORT.md).
+40 benchmark tasks (15 simple / 15 standard / 10 complex), each run once through the all-premium baseline (every task on the tier-3 model, no fallback) and once through the gateway, then scored 1-5 by an LLM judge (rubric v2, A/B order randomised). Costs are estimated at list prices. The classifier is trained on a **separate** 60-example set that shares no prompt with the benchmark (checked by `scripts/validate_benchmark.py`), so routing accuracy is held-out. Full report with the confusion matrix and run metadata: [`reports/EVAL_REPORT.md`](reports/EVAL_REPORT.md).
 
 | Metric | Value |
 |---|---|
-| Cost savings vs all-premium | **40.2%** ($0.0467 to $0.0279) |
-| Quality retention (routed score >= baseline - 0.5) | **90.0%** |
+| Routing accuracy, held-out (assigned tier = expected tier) | **80.0%** (macro precision 0.78, recall 0.79, F1 0.78) |
+| Cost savings vs all-premium | **37.8%** ($0.0467 to $0.0290) |
+| Cost savings excluding the 4 fallback tasks | 23.7% |
+| Quality retention (routed score >= baseline - 0.5) | **97.5%** |
 | Routed answers meeting each task's quality bar | 100% |
-| Routing accuracy (assigned tier = expected tier) | 82.5% |
-| Fallback rate | 12.5% |
+| Fallback rate | 10% (4 of 40) |
 | Latency p50 / p95, baseline | 349 ms / 12.8 s |
-| Latency p50 / p95, routed | 1.9 s / 8.4 s |
+| Latency p50 / p95, routed | 3.1 s / 22.1 s |
 
 | Expected tier | Routing accuracy | Savings |
 |---|---|---|
-| simple | 100% | 83.7% |
-| standard | 67% | 41.9% |
-| complex | 80% | 36.2% |
+| simple | 100% | 82.6% |
+| standard | 67% | 42.7% |
+| complex | 70% | 33.1% |
 
-Read these with the limitations below: the judge shares a model family with the routed models, and 5 of the 10 complex tasks were answered by the fallback model rather than the baseline.
+Routing confusion matrix (rows = expected, columns = assigned):
+
+```
+              Predicted
+           S      M      C
+Actual S [15]  [ 0]  [ 0]
+Actual M [ 2]  [10]  [ 3]
+Actual C [ 0]  [ 3]  [ 7]
+```
+
+An earlier run reported 82.5% routing accuracy, but the classifier had been trained on the benchmark prompts themselves, so that number was inflated. After separating the training data the honest figure is 80.0%. Read all of these with the limitations below. The latency columns are not like-for-like: the baseline was measured in an earlier session, and routed latency includes the embedding call and any retry backoff on rate-limited free-tier providers.
 
 ## Run locally
 
@@ -62,7 +73,9 @@ cp .env.template .env                               # fill in GROQ_API_KEY, GEMI
 make run                                            # API on http://localhost:8000
 make dashboard                                      # Streamlit on http://localhost:8501 (second terminal)
 make test && make lint
-python scripts/run_eval.py                          # full eval (~30 min on free tiers; --resume to continue)
+python scripts/validate_benchmark.py                 # benchmark schema + no train/benchmark leakage
+python scripts/train_classifier.py                   # retrain on data/classifier_train.json, prints CV precision/recall
+python scripts/run_eval.py                          # full eval (~30 min on free tiers; --resume to continue, --report-only to rebuild the report)
 ```
 
 ## API
@@ -88,30 +101,30 @@ curl -X POST https://arbiter-dzrv.onrender.com/generate \
 Request fields: `prompt` (required), `tenant_id` (required), `max_tokens` (1-8192, default 512), `priority` (`low`/`standard`/`high`), `task_type` (optional hint, currently unused).
 Errors: `401` bad key · `404` `{"error": "unknown_tenant"}` · `422` invalid body · `429` `{"error": "rate_limited"}` or `{"error": "budget_exceeded"}` · `503` `{"error": "all_models_exhausted"}`.
 
-**`GET /stats`** → aggregates over the JSONL log: request count, total cost, cache hit rate, estimated saved USD, fallback rate, tier distribution, cost by tenant and tier, p50/p95 latency, requests in the last 24h, cache size.
+**`GET /stats`** → aggregates over the JSONL log: request count, total cost, cache hit rate, estimated saved USD, fallback rate, tier distribution, cost by tenant and tier, p50/p95 latency, requests in the last 24h, cache size, cache max size and total LRU evictions.
 
 Tenants (budget, tier cap, rate limit) are defined in `config/tenants.yaml`.
 
 ## Design decisions
 
-**Rules before sklearn.** Four cheap, high-precision rules (very short prompt, very long prompt, code/debug keywords, simple-task keywords) decide the clear cases in microseconds at zero cost. Only ambiguous prompts reach a small logistic regression. Calling an LLM to pick an LLM would add latency and cost to every request, and with 40 labelled examples a bigger model would just overfit.
+**Rules before sklearn.** Four cheap, high-precision rules (very short prompt, very long prompt, code/debug keywords, simple-task keywords) decide the clear cases in microseconds at zero cost. Only ambiguous prompts reach a small logistic regression. Calling an LLM to pick an LLM would add latency and cost to every request, and with 60 labelled examples a bigger model would just overfit.
 
 **Cache keyed by (tenant, tier).** A cached answer is only served inside the same tenant and the same tier. This prevents cross-tenant data leaks and means a cache hit never contradicts the routing decision that was logged. Cache hits log `cost_usd = 0` and record the avoided cost in `saved_usd`, so `/stats` can report savings.
 
-**Deterministic cost map as a fallback.** LiteLLM's price table is used first, but it doesn't know every model (it raised `ModelNotMapped` for the Groq-hosted Qwen model) and it can lag behind releases. A manual per-token map in `router.py` guarantees every request gets a cost, so budgets and the dashboard never silently see `$0`.
+**One source of truth for pricing.** Model names and per-token prices live together in `config/litellm_config.yaml`, and `router.py` computes every request's cost from that file (LiteLLM's own price table isn't consulted, since it doesn't know every model and can lag behind releases). The file is validated when the app starts: a model with missing or invalid pricing stops startup with a clear error instead of silently costing $0 at request time.
 
 ## Honest limitations
 
 1. **Single process, in-memory state.** Rate limits, budgets and the cache live in the process. They reset on restart and do not work across multiple instances (needs Redis).
 2. **Free-tier quotas.** On this key Gemini allows about 15 requests/day per model and Groq about 8k tokens/minute. Standard requests fall back to Groq once Gemini's quota is gone, so a busy live service mostly runs on Groq.
-3. **Classifier trained on 40 examples.** Cross-validated accuracy is 72.5%. On the benchmark, 7 of 40 tasks were misrouted (for example, standard tasks containing code or the word "summarize").
-4. **The eval is small and the judge is generous.** One run of 40 tasks; the judge (`gpt-oss-120b`) is the fallback model and shares a family with tier 1, and it scores everything 4.6-4.8 on average. Treat 40.2% and 90% as indicative.
-5. **The baseline is partly the fallback.** Five complex tasks (c006-c010) were answered by `gpt-oss-120b` after the baseline-tier model hit rate limits, so the complex-tier savings compare 120b to Qwen rather than pure routing.
+3. **Small, weak classifier.** It is trained on 60 hand-written examples; cross-validated accuracy is 70.0%. On the held-out benchmark 8 of 40 tasks were misrouted (for example, standard tasks containing code or the word "summarize" go to the wrong tier).
+4. **The eval is small and the judge is generous.** One run of 40 tasks. The judge (`gpt-oss-120b`) is also the fallback model and shares a family with tier 1, and even with the stricter rubric it scores everything about 4.9 on average, so quality retention is a loose measure. Treat 37.8% and 97.5% as indicative, not precise.
+5. **Fallbacks flatter the savings.** Four routed requests (m013, c003, c006, c010) were answered by `gpt-oss-120b` after the primary model was rate-limited. That model is cheaper than the Qwen baseline, so excluding those tasks the saving drops from 37.8% to 23.7%.
 
 ## Failure modes
 
 1. **Render cold start.** The free tier sleeps after 15 idle minutes; the first request takes ~20-30s (18s measured on this deploy). Mitigation: a keep-alive ping, or a paid instance.
 2. **Provider quota exhaustion.** The eval stalled twice when Gemini returned `429 GenerateRequestsPerDayPerProjectPerModel-FreeTier`. The router now treats this like any other failure and falls back to Groq.
 3. **Model deprecation.** Every model in the original plan (Llama 3.1, Gemini 1.5, `text-embedding-004`) was retired or closed to new users before the build finished. Mitigation: model names live in one YAML file and the live model list should be checked before each release.
-4. **Unbounded cache.** Entries expire after an hour but there is no size cap; a long-lived instance with many distinct prompts grows without limit. Fix: add `max_size` with LRU eviction.
+4. **Cache is bounded but per-process.** It holds at most 500 entries (global LRU eviction, hits refresh recency) plus a 1-hour TTL, and `/stats` reports size and evictions. It is still in memory, so it empties on restart and isn't shared between instances. Fix: Redis.
 5. **Logs lost on restart.** `logs/requests.jsonl` is ephemeral on Render's free tier, so `/stats` resets. Fix: point `LOG_PATH` at a mounted volume or ship logs to external storage.

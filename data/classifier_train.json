@@ -1,0 +1,242 @@
+[
+  {
+    "prompt": "Define recursion.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "What is the boiling point of water at sea level in Celsius?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Translate 'where is the library' into German.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Who painted the Mona Lisa?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Is a tomato a fruit or a vegetable? Answer in one word.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Convert 3.5 hours into minutes.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "What is the largest planet in the solar system?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Give a one-word antonym for 'ancient'.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "How many days are there in a leap year?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Reply yes or no: does the Nile flow through Egypt?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Convert the time 17:45 to 12-hour format.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "What year did the Berlin Wall fall?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Write the plural of 'cactus'.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Summarise in one sentence: Heavy rain flooded the main road on Tuesday, so the bus service was suspended until the water drained.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Name the author of 'The Old Man and the Sea'.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Classify this message as spam or not spam: 'You have won a free cruise, click here now!'",
+    "tier": "simple"
+  },
+  {
+    "prompt": "What does the abbreviation 'CPU' stand for?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "I'm putting together a quiz for my niece's birthday party this weekend. She's turning nine and loves animals, space, and anything to do with the ocean. We have about twelve kids coming and I want the questions to be light and fun rather than stressful. Anyway, one of the questions I've drafted is just a quick fact check: what is the tallest animal in the world?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "My grandfather keeps a small garden behind the house and every spring we help him plant vegetables, mostly tomatoes, beans and some herbs. Last weekend we were talking about the old farm where he grew up, which had cows, chickens and a big red barn. It got me curious about something unrelated, so quickly: what is the currency of Japan?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Convert 250 grams to ounces, rounded to one decimal.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Summarize the following paragraph in 3 sentences.\n\nCoral reefs cover less than one percent of the ocean floor, yet they support roughly a quarter of all marine species. They form when tiny animals called polyps build hard calcium carbonate skeletons that accumulate over centuries. Rising sea temperatures cause corals to expel the algae that feed them, a process known as bleaching. Pollution, overfishing and ocean acidification add further stress, and scientists warn that many reefs could be lost within decades without sharp cuts to carbon emissions.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Read the context and answer the question in two sentences.\n\nContext: The city library is open Monday to Friday from 9am to 8pm and Saturday from 10am to 4pm. It is closed on Sundays and public holidays. Members may borrow up to ten books for three weeks, and each loan can be renewed once online unless another member has reserved the book. Late returns cost 25 cents per day per item.\n\nQuestion: A member borrowed a book four weeks ago and never renewed it. Roughly what late fee do they owe, and when can they return it this week?",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Write a docstring for this Go function:\n\nfunc Chunk(items []string, size int) [][]string {\n\tvar out [][]string\n\tfor size < len(items) {\n\t\titems, out = items[size:], append(out, items[:size:size])\n\t}\n\treturn append(out, items)\n}",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Analyse the sentiment of this restaurant review and justify it in 2-3 sentences: 'We waited forty minutes for a table and the waiter forgot our drinks, but the pasta was the best I have had outside Italy and the dessert made up for everything.'",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Extract the key points from the following paragraph as 4-5 bullets.\n\nCycling to work has grown in many cities as councils add protected lanes. Commuters report lower travel costs and more predictable journey times than driving in traffic. Health studies link regular cycling to reduced heart disease risk. On the downside, riders worry about theft, bad weather and sharing roads with heavy vehicles, and employers without showers or secure parking see lower uptake.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Read the context and answer.\n\nContext: The 07:15 express from Northfield to Harbor Central stops only at Millbrook and Ashford and takes 52 minutes. The 07:30 local train calls at every station and takes 1 hour 20 minutes. Both services run Monday to Saturday; on Sundays only the local train runs, starting at 09:00.\n\nQuestion: I need to reach Harbor Central by 08:30 on a Wednesday. Which train should I take and why?",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Summarise this news paragraph in three sentences.\n\nA new solar farm covering 400 hectares has begun supplying power to the regional grid. The project, built over two years, includes 600,000 panels and a battery system able to store enough electricity to power 20,000 homes for four hours. Local officials say it will create 50 permanent jobs and cut yearly emissions by about 150,000 tonnes, though some residents have raised concerns about the loss of farmland and the visual impact on the valley.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Classify each of the comments below as positive, negative or neutral and give a one-line reason for each.\n\n1. 'The charger stopped working after a week, really disappointing.'\n2. 'Fits perfectly and arrived a day early, will buy again.'\n3. 'The box contains the device, a cable and a manual.'",
+    "tier": "standard"
+  },
+  {
+    "prompt": "List all the people, organisations and places mentioned in this text, in three labelled lists.\n\n'At the Lisbon summit in June, Maria Costa of the World Health Organization joined researchers from Oxford University and the Pasteur Institute to discuss vaccine distribution in West Africa. The next meeting will take place in Nairobi, hosted by Dr. Samuel Kiptoo.'",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Rewrite the following in simple language that a ten-year-old could understand: 'Photovoltaic cells convert incident solar radiation into direct current electricity through the photoelectric effect, which occurs when photons dislodge electrons in a semiconductor material.'",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain in 3-4 sentences how vaccines help the immune system recognise a virus it has not met before.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Write a Javadoc comment for this method:\n\npublic static int daysBetween(LocalDate start, LocalDate end) {\n    if (end.isBefore(start)) {\n        throw new IllegalArgumentException(\"end before start\");\n    }\n    return (int) ChronoUnit.DAYS.between(start, end);\n}",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Turn this email thread into a list of action items with an owner for each.\n\nAnna: I'll finalise the slide deck by Thursday. Ben: Can someone confirm the catering numbers? Chloe: I can do that, I'll call them tomorrow morning. Ben: Great, then I'll send the invitations once the numbers are confirmed. Anna: Also, we still need someone to book the projector. Chloe: Leave that with me too.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Summarize the key decisions from these meeting minutes in a short bulleted list.\n\nThe team agreed to move the product launch from March to April to allow more testing. Budget for advertising was increased by ten percent. The support team will hire two temporary staff for the launch month. The proposal to redesign the logo was postponed until after the launch, pending customer feedback.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Read the clause and answer the question.\n\nClause: The tenant shall give the landlord at least sixty days' written notice before vacating the property. If less notice is given, the tenant remains liable for rent for the unexpired portion of the notice period. The security deposit will be returned within thirty days of the tenant vacating, less any deductions for damage beyond normal wear and tear.\n\nQuestion: If a tenant leaves with only 30 days' notice, what are they still responsible for?",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain the difference between a stack and a queue in a short paragraph, with one everyday example of each.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Write a polite reply, in 4-5 sentences, to a customer who complained that their order arrived a week late and the packaging was damaged. Offer a refund of the shipping cost.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Classify each support ticket as billing, technical or account and give a one-line reason.\n\n1. 'I was charged twice for my subscription this month.'\n2. 'The app crashes every time I open the camera.'\n3. 'I cannot remember which email address I used to register.'",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Create a 5-question multiple choice quiz from this paragraph.\n\nWater evaporates from oceans and lakes when heated by the sun, rising as vapour into the atmosphere. As it cools, the vapour condenses into tiny droplets that form clouds. When droplets grow heavy enough they fall as precipitation, such as rain or snow. The water then runs into rivers or soaks into the ground, eventually returning to the sea, and the cycle begins again.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Based on the paragraph below, summarise the pros and cons of a four-day work week in two short lists.\n\nTrials of a four-day week report higher employee satisfaction, fewer sick days and in many cases unchanged output. Companies also see better recruitment. However, customer-facing teams sometimes struggle to provide full coverage, some roles need compressed hours that lead to longer days, and managers report extra scheduling effort in the first few months.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Summarize this Python program and explain the bug.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Explain recursion with an implementation and complexity analysis.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Write a complete production implementation of a rate limiter.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Implement an LRU cache class in Python with O(1) get and put, using only the standard library. Include type hints and a few example calls showing eviction.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Write a function that checks whether a string containing (), [] and {} brackets is balanced, and include unit tests covering nested, interleaved and empty inputs.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "This Python code is supposed to remove every even number from the list but it leaves some behind. Find the bug, explain exactly why it happens, and give a corrected version.\n\nnums = [2, 4, 6, 1, 3, 8]\nfor x in nums:\n    if x % 2 == 0:\n        nums.remove(x)\nprint(nums)",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Implement binary search in Rust for a sorted slice of i32, returning Option<usize>. Add tests for an empty slice, a missing value, duplicates and the first and last elements.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "A tank can be filled by pipe A in 6 hours and by pipe B in 4 hours, but a drain empties a full tank in 12 hours. If all three are open at once and the tank starts empty, how long does it take to fill? Show your reasoning step by step and check the result.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Prove that there are infinitely many prime numbers.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "If I flip a fair coin 10 times, what is the probability of getting at least 8 heads? Show the derivation.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Compare and contrast TCP and UDP. Cover reliability, ordering, congestion control, header overhead and typical use cases, explain the trade-offs, and give a recommendation for a live video call app. Aim for at least 300 words.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Compare and contrast microkernel and monolithic operating system designs: performance, fault isolation, security, driver complexity and maintainability. Conclude with when each is the better choice. Write at least 300 words.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Design the database schema and REST endpoints for a multi-tenant todo application where each tenant has users, projects and tasks with comments. Explain how you would enforce tenant isolation and handle pagination.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Write a regular expression that validates ISO 8601 calendar dates (YYYY-MM-DD) including correct month lengths for the 30-day months, and provide test strings that should and should not match.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "This pagination helper returns duplicate items on page boundaries. Find the bug and explain it.\n\ndef paginate(items, page, per_page):\n    start = page * per_page\n    end = start + per_page + 1\n    return items[start:end]",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Refactor this function to remove the duplicated logic and explain the trade-offs of your approach.\n\ndef price(kind, qty):\n    if kind == 'basic':\n        total = qty * 10\n        if qty > 100:\n            total = total * 0.9\n        return total\n    if kind == 'pro':\n        total = qty * 25\n        if qty > 100:\n            total = total * 0.9\n        return total",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Three friends split a restaurant bill. Alice pays 40 percent of the total, Bob pays 30 dollars more than Chloe, and Chloe pays half of what Alice pays. What is the total bill and what does each person pay? Work through the algebra carefully.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Implement a thread-safe bounded blocking queue in Java with put and take methods, using only java.util.concurrent primitives, and explain how it avoids deadlock.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Analyze the time complexity of this recursive function and rewrite it with memoization.\n\ndef paths(r, c):\n    if r == 0 or c == 0:\n        return 1\n    return paths(r - 1, c) + paths(r, c - 1)",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Write a Python script that reads a CSV of transactions with columns customer_id, amount and date, groups spending by customer, and prints the top 5 spenders. Handle malformed rows gracefully and add basic tests.",
+    "tier": "complex"
+  }
+]

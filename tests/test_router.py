@@ -1,9 +1,11 @@
+import os
 from types import SimpleNamespace
 from unittest.mock import patch
 
 import litellm
 import pytest
 
+from arbiter import router
 from arbiter.router import GatewayError, call_llm
 
 
@@ -23,9 +25,8 @@ def timeout():
 
 
 @pytest.fixture(autouse=True)
-def no_sleep_no_cost_db():
-    with patch("arbiter.router.time.sleep") as sleep, \
-            patch("litellm.completion_cost", return_value=0.0):
+def no_sleep():
+    with patch("arbiter.router.time.sleep") as sleep:
         yield sleep
 
 
@@ -51,7 +52,7 @@ def test_complex_calls_tier3_first():
     assert r.fallback_triggered is False
 
 
-def test_tier3_rate_limited_retries_3x_then_falls_back(no_sleep_no_cost_db):
+def test_tier3_rate_limited_retries_3x_then_falls_back(no_sleep):
     side = [rate_limit(), rate_limit(), rate_limit(), ok()]
     with patch("litellm.completion", side_effect=side) as comp:
         r = call_llm("complex", "hi", 64)
@@ -59,7 +60,7 @@ def test_tier3_rate_limited_retries_3x_then_falls_back(no_sleep_no_cost_db):
     assert models == ["openai/qwen/qwen3.8-27b"] * 3 + ["groq/openai/gpt-oss-120b"]
     assert r.model == "groq/openai/gpt-oss-120b"
     assert r.fallback_triggered is True
-    assert [c.args[0] for c in no_sleep_no_cost_db.call_args_list] == [1, 2]  # backoff
+    assert [c.args[0] for c in no_sleep.call_args_list] == [1, 2]  # backoff
 
 
 def test_all_models_timeout_raises_gateway_error():
@@ -85,24 +86,75 @@ def test_single_model_tier_exhausts_to_gateway_error():
     ("standard", "gemini/gemini-3.1-flash-lite", 1_000_000, 1_000_000, 0.25 + 1.50),
     ("complex", "openai/qwen/qwen3.8-27b", 1_000_000, 1_000_000, 0.80 + 4.0),
 ])
-def test_manual_cost_when_litellm_returns_zero(tier, model, tin, tout, expected):
+def test_cost_comes_from_config_pricing(tier, model, tin, tout, expected):
     with patch("litellm.completion", return_value=ok(tin, tout)):
         r = call_llm(tier, "hi", 64)
     assert r.model == model
     assert r.cost_usd == pytest.approx(expected)
 
 
-def test_fallback_model_manual_cost():
+def test_fallback_model_cost_uses_fallback_pricing():
     side = [RuntimeError("x"), ok(1_000_000, 1_000_000)]
     with patch("litellm.completion", side_effect=side):
         r = call_llm("complex", "hi", 64)
     assert r.cost_usd == pytest.approx(0.15 + 0.60)
 
 
-def test_litellm_cost_preferred_when_available():
-    with patch("litellm.completion", return_value=ok()), \
-            patch("litellm.completion_cost", return_value=0.123):
-        assert call_llm("simple", "hi", 64).cost_usd == 0.123
+def test_cost_uses_values_from_config_not_hardcoded(monkeypatch):
+    custom = {a: {**p, "pricing": {"input_per_1m": 1.0, "output_per_1m": 2.0}}
+              for a, p in router.model_list().items()}
+    monkeypatch.setattr(router, "model_list", lambda: custom)
+    with patch("litellm.completion", return_value=ok(1_000_000, 500_000)):
+        assert call_llm("simple", "hi", 64).cost_usd == pytest.approx(1.0 + 1.0)
+
+
+def test_every_configured_model_has_pricing():
+    models = router.model_list()
+    assert {"tier1", "tier2", "tier3", "tier3_fallback", "tier2_fallback"} <= set(models)
+    for alias, params in models.items():
+        assert params["pricing"]["input_per_1m"] > 0, alias
+        assert params["pricing"]["output_per_1m"] > 0, alias
+
+
+def _write_config(tmp_path, pricing_lines):
+    path = tmp_path / "cfg.yaml"
+    head = [
+        "model_list:",
+        "  - model_name: tier1",
+        "    litellm_params:",
+        "      model: groq/x",
+        '      api_key: "os.environ/GROQ_API_KEY"',
+    ]
+    path.write_text(os.linesep.join(head + pricing_lines) + os.linesep)
+    return path
+
+
+@pytest.mark.parametrize("pricing_lines", [
+    [],
+    ["    pricing:", "      input_per_1m: 0.1"],
+    ["    pricing:", "      input_per_1m: 0.1", "      output_per_1m: abc"],
+    ["    pricing:", "      input_per_1m: -1", "      output_per_1m: 1"],
+])
+def test_missing_or_invalid_pricing_raises_at_config_load(tmp_path, pricing_lines):
+    with pytest.raises(ValueError, match="tier1.*pricing"):
+        router.load_model_list(_write_config(tmp_path, pricing_lines))
+
+
+def test_valid_pricing_loads(tmp_path):
+    lines = ["    pricing:", "      input_per_1m: 0.1", "      output_per_1m: 0.2"]
+    models = router.load_model_list(_write_config(tmp_path, lines))
+    assert models["tier1"]["pricing"] == {"input_per_1m": 0.1, "output_per_1m": 0.2}
+
+
+def test_app_refuses_to_start_when_pricing_missing(monkeypatch):
+    from arbiter.api import create_app
+
+    def broken():
+        raise ValueError("model 'tier9' is missing a valid pricing.input_per_1m")
+
+    monkeypatch.setattr("arbiter.api.model_list", broken)
+    with pytest.raises(ValueError, match="pricing"):
+        create_app({})
 
 
 def test_tier3_passes_groq_openai_compatible_api_base():

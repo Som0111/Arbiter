@@ -23,7 +23,7 @@ from arbiter.logger import (
     trace_request,
     write_log,
 )
-from arbiter.router import GatewayError, call_llm
+from arbiter.router import GatewayError, call_llm, model_list
 
 
 class GenerateRequest(BaseModel):
@@ -49,6 +49,7 @@ class GenerateResponse(BaseModel):
 
 def create_app(tenants: dict | None = None) -> FastAPI:
     tenants = tenants if tenants is not None else load_tenants()
+    model_list()  # fail at startup, not at request time, if any model lacks pricing
     langfuse = init_langfuse()
 
     @asynccontextmanager
@@ -144,7 +145,13 @@ def create_app(tenants: dict | None = None) -> FastAPI:
 
     @app.get("/stats", dependencies=[Depends(require_api_key)])
     async def stats():
-        return {**compute_stats(read_logs()), "cache_size": app.state.cache.size()}
+        cache = app.state.cache
+        return {
+            **compute_stats(read_logs()),
+            "cache_size": cache.size(),
+            "cache_max_size": cache.max_size,
+            "cache_evictions_total": cache.evictions_total,
+        }
 
     return app
 

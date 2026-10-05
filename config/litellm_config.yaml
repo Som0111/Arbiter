@@ -1,13 +1,21 @@
+# Single source of truth for model names AND pricing (USD per 1M tokens, list prices).
+# Every entry must have a pricing block: the app refuses to start without one.
 model_list:
   - model_name: tier1
     litellm_params:
       model: groq/openai/gpt-oss-20b
       api_key: "os.environ/GROQ_API_KEY"
+    pricing:
+      input_per_1m: 0.075
+      output_per_1m: 0.30
 
   - model_name: tier2
     litellm_params:
       model: gemini/gemini-3.1-flash-lite
       api_key: "os.environ/GEMINI_API_KEY"
+    pricing:
+      input_per_1m: 0.25
+      output_per_1m: 1.50
 
   - model_name: tier3
     litellm_params:
@@ -15,14 +23,23 @@ model_list:
       model: openai/qwen/qwen3.8-27b
       api_base: https://api.groq.com/openai/v1
       api_key: "os.environ/GROQ_API_KEY"
+    pricing:
+      input_per_1m: 0.80
+      output_per_1m: 4.00
 
   - model_name: tier3_fallback
     litellm_params:
       model: groq/openai/gpt-oss-120b
       api_key: "os.environ/GROQ_API_KEY"
+    pricing:
+      input_per_1m: 0.15
+      output_per_1m: 0.60
 
   # Gemini's free tier is ~15 requests/day per model, so tier2 falls back to Groq.
   - model_name: tier2_fallback
     litellm_params:
       model: groq/openai/gpt-oss-120b
       api_key: "os.environ/GROQ_API_KEY"
+    pricing:
+      input_per_1m: 0.15
+      output_per_1m: 0.60

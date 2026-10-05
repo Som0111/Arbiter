@@ -135,6 +135,7 @@ def test_second_identical_request_is_cache_hit_with_zero_cost(app, client, fake_
     assert fake_llm.call_count == 1
     stats = client.get("/stats", headers=HEADERS).json()
     assert (stats["cache_hit_rate"], stats["cache_size"]) == (0.5, 1)
+    assert (stats["cache_max_size"], stats["cache_evictions_total"]) == (500, 0)
     assert stats["estimated_saved_usd"] == pytest.approx(0.001)
     assert app.state.budget.get_remaining("tenant_test") == pytest.approx(999.0 - 0.001)
 

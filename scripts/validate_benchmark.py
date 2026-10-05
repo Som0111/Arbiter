@@ -1,17 +1,23 @@
-"""Validate data/benchmark/benchmark.json and regenerate classifier_train.json."""
+"""Validate data/benchmark/benchmark.json and assert it doesn't leak into the classifier training set."""
 import json
 import sys
 from collections import Counter
 from pathlib import Path
 
-DATA = Path(__file__).resolve().parent.parent / "data" / "benchmark"
+DATA = Path(__file__).resolve().parent.parent / "data"
+BENCHMARK = DATA / "benchmark" / "benchmark.json"
+TRAIN = DATA / "classifier_train.json"
 FIELDS = {"id", "tier", "prompt", "expected_keywords", "quality_bar", "max_cost_usd",
           "max_latency_ms"}
 TIERS = ("simple", "standard", "complex")
 
 
+def normalize(text: str) -> str:
+    return " ".join(text.lower().split())
+
+
 def main() -> int:
-    tasks = json.loads((DATA / "benchmark.json").read_text(encoding="utf-8"))
+    tasks = json.loads(BENCHMARK.read_text(encoding="utf-8"))
     errors = []
     for t in tasks:
         tid = t.get("id", "?")
@@ -25,15 +31,20 @@ def main() -> int:
         if not t["prompt"].strip():
             errors.append(f"{tid}: empty prompt")
     errors += [f"duplicate id {i}" for i, n in Counter(t.get("id") for t in tasks).items() if n > 1]
+
+    # Leakage: the classifier must never be trained on prompts it is evaluated on.
+    train = json.loads(TRAIN.read_text(encoding="utf-8"))
+    bench_prompts = {normalize(t["prompt"]): t.get("id", "?") for t in tasks if "prompt" in t}
+    errors += [f"LEAK: benchmark task {bench_prompts[normalize(r['prompt'])]} also in {TRAIN.name}"
+               for r in train if normalize(r["prompt"]) in bench_prompts]
+
     if errors:
         print("Validation FAILED:\n  " + "\n  ".join(errors))
         return 1
     counts = Counter(t["tier"] for t in tasks)
-    train = [{"prompt": t["prompt"], "tier": t["tier"]} for t in tasks]
-    (DATA / "classifier_train.json").write_text(
-        json.dumps(train, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"Validation passed. simple={counts['simple']} standard={counts['standard']} "
           f"complex={counts['complex']} total={len(tasks)}")
+    print(f"No leakage: 0 of {len(train)} training prompts appear in the benchmark.")
     return 0
 
 
