@@ -9,7 +9,7 @@ Arbiter is an LLM gateway. Think of it as a smart switchboard that sits between 
 
 Every time someone sends a prompt, Arbiter asks: *"How hard is this task?"* Then it picks the cheapest model that can handle it well — not always the most expensive one.
 
-**Why does this matter?** If you route everything to GPT-4 or Llama-70B, you pay top dollar for every single request, even when a much cheaper 8B model would give an equally good answer for a simple question.
+**Why does this matter?** If you route everything to your biggest model, you pay top dollar for every single request, even when a much cheaper small model would give an equally good answer for a simple question.
 
 ---
 
@@ -17,11 +17,11 @@ Every time someone sends a prompt, Arbiter asks: *"How hard is this task?"* Then
 
 | Tier | Model | Used for | Cost |
 |---|---|---|---|
-| 1 — Simple | Groq Llama 3.1 8B | One-liners, translation, factual Q&A | Cheapest |
-| 2 — Standard | Gemini 1.5 Flash | Summaries, short code, Q&A with context | Medium |
-| 3 — Complex | Groq Llama 3.1 70B | Long code, debugging, deep reasoning | Expensive |
+| 1 — Simple | Groq gpt-oss-20b | One-liners, translation, factual Q&A | Cheapest |
+| 2 — Standard | Gemini 3.1 Flash-Lite | Summaries, short code, Q&A with context | Medium |
+| 3 — Complex | Groq Qwen3.8 27B | Long code, debugging, deep reasoning | Expensive |
 
-If the Tier 3 model is unavailable (rate-limited), it falls back to Gemini 1.5 Pro.
+If the Tier 3 model is unavailable (rate-limited), it falls back to Groq gpt-oss-120b. Tier 2 falls back to the same model when Gemini's free daily quota runs out.
 
 ---
 
@@ -86,7 +86,7 @@ User sends: POST /generate
 Response returned to user:
   {
     "response": "def sort_list(lst): return sorted(lst)...",
-    "model_used": "groq/llama-3.1-70b-versatile",
+    "model_used": "openai/qwen/qwen3.8-27b",
     "tier": "complex",
     "tokens_in": 18,
     "tokens_out": 45,
@@ -153,7 +153,7 @@ LiteLLM also tracks token usage and computes cost per request automatically.
 ### 7. Logger (logger.py)
 Every request — successful or not — gets one line appended to `logs/requests.jsonl`. This is a text file where each line is a JSON object. Example line:
 ```json
-{"request_id": "abc123", "tenant_id": "tenant_b", "tier": "complex", "model_used": "groq/llama-3.1-70b-versatile", "tokens_in": 18, "tokens_out": 45, "cost_usd": 0.000038, "latency_ms": 812, "cache_hit": false, "fallback_triggered": false, "success": true, "timestamp": "2026-10-04T11:00:00Z"}
+{"request_id": "abc123", "tenant_id": "tenant_b", "tier": "complex", "model_used": "openai/qwen/qwen3.8-27b", "tokens_in": 18, "tokens_out": 45, "cost_usd": 0.000038, "latency_ms": 812, "cache_hit": false, "fallback_triggered": false, "success": true, "timestamp": "2026-10-04T11:00:00Z"}
 ```
 
 Langfuse (optional) provides a web UI to explore individual traces — you can see exactly which classifier ruled triggered, how long the cache lookup took, and what the LLM returned.
@@ -177,7 +177,7 @@ Then compares:
 - Quality: did cheaper models produce good-enough answers?
 - Routing accuracy: did the classifier assign the right tier?
 
-A Gemini Flash LLM judge scores each answer 1–5.
+An LLM judge (Groq gpt-oss-120b) scores each answer 1–5.
 
 ---
 
@@ -202,9 +202,9 @@ Everything runs within free-tier limits:
 | Service | Free limit | How we stay within it |
 |---|---|---|
 | Groq | 14,400 req/day per model | Rate limiter + retry backoff |
-| Gemini Flash | 1,500 req/day | Rate limiter per tenant |
-| Gemini Pro | 50 req/day | Only used as Tier 3 fallback |
-| Gemini embeddings | 1,500 req/day | Cache avoids redundant embeddings |
+| Gemini Flash-Lite | ~15 req/day per model (free tier) | Falls back to Groq when exhausted |
+| Groq models | ~1,000 req/day, ~8k tokens/min | Retry/backoff, paced eval |
+| Gemini embeddings | free-tier limit applies | Cache avoids redundant embeddings; embed failure skips the cache |
 | Render | 750 hrs/month | One service, Docker |
 | Langfuse | Unlimited (free tier) | Tracing only, no compute |
 | GitHub Actions | 2,000 min/month | Tests run only on push |
@@ -277,7 +277,7 @@ Auth required (`X-API-Key` header).
 // Response
 {
   "response": "def reverse_string(s): return s[::-1]",
-  "model_used": "groq/llama-3.1-70b-versatile",
+  "model_used": "openai/qwen/qwen3.8-27b",
   "tier": "complex",
   "tokens_in": 11,
   "tokens_out": 12,
@@ -316,7 +316,7 @@ The benchmark has 40 examples. A neural classifier trained on 40 examples would 
 2. **Logs reset on Render restart** because free tier has ephemeral storage. Fix in production: mount a volume or point logs to an external store.
 3. **Cache is in-memory** — it resets on server restart. In production, Redis (e.g. Upstash free tier) would persist it.
 4. **Classifier trained on 40 examples** — unusual prompt styles may be misclassified.
-5. **Gemini Pro 50 RPD limit** — the fallback model is rarely available at scale. In a real system, tier 3 would need a paid account.
+5. **Free-tier quotas** — Gemini allows only ~15 requests/day per model on the free tier, and Groq ~8k tokens/minute. Under real load the gateway leans on its fallbacks; a real deployment needs paid accounts.
 
 ---
 
@@ -335,7 +335,7 @@ A: That would mean calling a model to decide which model to call — adding late
 A: Ran 40 benchmark tasks twice: once forcing all requests to Tier 3 (baseline), once through the full routing system. Computed `(baseline_cost - routed_cost) / baseline_cost`. The routed system also scored equivalent quality (LLM-judge ≥ baseline score −0.5) to confirm savings didn't come at a quality penalty.
 
 **Q: What breaks at 10x traffic?**
-A: (1) In-memory rate limiter and cache don't survive horizontal scaling — need Redis. (2) JSONL log becomes a write bottleneck — need async logging or a proper DB. (3) Gemini Pro's 50 RPD limit would hit immediately. (4) Render free tier can't handle concurrent load.
+A: (1) In-memory rate limiter and cache don't survive horizontal scaling — need Redis. (2) JSONL log becomes a write bottleneck — need async logging or a proper DB. (3) Gemini's free-tier daily quota would be exhausted immediately. (4) Render free tier can't handle concurrent load.
 
 **Q: Why is the semantic cache keyed by both tenant_id and tier?**
 A: Tenant isolation prevents data leakage between customers. Tier isolation ensures we don't serve a Tier-3 quality answer to a Tier-1 slot without recording the correct model + cost — the routing decision and the cache hit must tell the same story.

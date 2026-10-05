@@ -8,5 +8,6 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: "3.11"}
       - run: pip install -e ".[dev]"
-      - run: pytest -q
       - run: ruff check src/ tests/
+      - run: pytest -q
+      - run: docker build -t arbiter .

@@ -3,6 +3,8 @@
 
 > Claude Code owns all phases. Every `🧑 HUMAN` block is a step only you can do — read it, complete it, then tell Claude Code to continue.
 
+> **Update (Phases 6-8):** the model names below were retired or quota-limited by the time of the build. Current tiers: `groq/openai/gpt-oss-20b` / `gemini/gemini-3.1-flash-lite` / `openai/qwen/qwen3.8-27b` (Groq), fallback `groq/openai/gpt-oss-120b`, embeddings `gemini-embedding-001`. See README.md and `config/litellm_config.yaml` for the source of truth.
+
 ---
 
 ## Project Overview
