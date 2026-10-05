@@ -8,18 +8,18 @@
 
 ```mermaid
 flowchart TD
-    C[Client: POST /generate] --> A[Auth: X-API-Key]
-    A --> RL[Rate limiter: sliding 60s window per tenant]
-    RL --> B[Budget gate: daily USD per tenant]
-    B --> CL[Classifier: rules first, sklearn if ambiguous]
-    CL --> TC[Tenant tier cap]
-    TC --> CA{Semantic cache: per tenant and tier}
-    CA -- hit --> R[Response, cost 0]
-    CA -- miss --> LLM[LiteLLM router: retry, backoff, fallback]
+    C["Client: POST /generate"] --> A["Auth: X-API-Key"]
+    A --> RL["Rate limiter: sliding 60s window per tenant"]
+    RL --> B["Budget gate: daily USD per tenant"]
+    B --> CL["Classifier: rules first, sklearn if ambiguous"]
+    CL --> TC["Tenant tier cap"]
+    TC --> CA{"Semantic cache: per tenant and tier"}
+    CA -- hit --> R["Response, cost 0"]
+    CA -- miss --> LLM["LiteLLM router: retry, backoff, fallback"]
     LLM --> R
-    LLM --> LOG[JSONL log + optional Langfuse trace]
+    LLM --> LOG["JSONL log and optional Langfuse trace"]
     R --> LOG
-    LOG --> ST[/stats and Streamlit dashboard]
+    LOG --> ST["GET /stats and Streamlit dashboard"]
 ```
 
 | Tier | Primary model | Fallback |
@@ -115,7 +115,3 @@ Tenants (budget, tier cap, rate limit) are defined in `config/tenants.yaml`.
 3. **Model deprecation.** Every model in the original plan (Llama 3.1, Gemini 1.5, `text-embedding-004`) was retired or closed to new users before the build finished. Mitigation: model names live in one YAML file and the live model list should be checked before each release.
 4. **Unbounded cache.** Entries expire after an hour but there is no size cap; a long-lived instance with many distinct prompts grows without limit. Fix: add `max_size` with LRU eviction.
 5. **Logs lost on restart.** `logs/requests.jsonl` is ephemeral on Render's free tier, so `/stats` resets. Fix: point `LOG_PATH` at a mounted volume or ship logs to external storage.
-
-## Résumé bullet
-
-> Built a multi-provider LLM gateway (FastAPI, LiteLLM) that routes requests across 3 model tiers (Groq gpt-oss-20B / Gemini Flash-Lite / Groq Qwen3.8-27B) by task complexity, per-tenant tier caps, budgets and rate limits; implemented a rule-based + scikit-learn classifier, semantic caching with Gemini embeddings, provider fallback with exponential backoff, and request-level token/cost telemetry; eval-driven routing cut estimated inference spend by **40.2%** while keeping quality retention at **90%** on 40 benchmark tasks.
