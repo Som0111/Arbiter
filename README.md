@@ -101,8 +101,8 @@ curl -X POST https://arbiter-dzrv.onrender.com/generate \
  "latency_ms": 1425.9, "cache_hit": false, "fallback_triggered": false, "request_id": "req_d2c1bbfadd22"}
 ```
 
-Request fields: `prompt` (required), `tenant_id` (required), `max_tokens` (1-8192, default 512), `priority` (`low`/`standard`/`high`), `task_type` (optional hint, currently unused).
-Errors: `401` bad key · `404` `{"error": "unknown_tenant"}` · `422` invalid body · `429` `{"error": "rate_limited"}` or `{"error": "budget_exceeded"}` · `503` `{"error": "all_models_exhausted"}` or `{"error": "state_unavailable"}` (Redis state failure, see below).
+Request fields: `prompt` (required), `max_tokens` (1-8192, default 512), `priority` (`low`/`standard`/`high`), `task_type` (optional hint, currently unused).
+Errors: `401` bad key · `422` invalid body · `429` `{"error": "rate_limited"}` or `{"error": "budget_exceeded"}` · `503` `{"error": "all_models_exhausted"}` or `{"error": "state_unavailable"}` (Redis state failure, see below).
 
 **`GET /stats`** → aggregates over the JSONL log: request count, total cost, cache hit rate, estimated saved USD, fallback rate, tier distribution, cost by tenant and tier, p50/p95 latency, requests in the last 24h, cache size, cache max size and total LRU evictions.
 
@@ -110,7 +110,7 @@ Tenants (budget, tier cap, rate limit) are defined in `config/tenants.yaml`.
 
 ## Design decisions
 
-**Rules before sklearn.** Four cheap, high-precision rules (very short prompt, very long prompt, code/debug keywords, simple-task keywords) decide the clear cases in microseconds at zero cost. Only ambiguous prompts reach a small logistic regression. Calling an LLM to pick an LLM would add latency and cost to every request, and with 60 labelled examples a bigger model would just overfit.
+**Rules before sklearn.** Three cheap, high-precision rules (very short prompt, very long prompt, code/debug keywords) decide the clear cases in microseconds at zero cost. Only ambiguous prompts reach a small random forest. Calling an LLM to pick an LLM would add latency and cost to every request, and with 159 labelled examples a bigger model would just overfit.
 
 **Cache keyed by (tenant, tier).** A cached answer is only served inside the same tenant and the same tier. This prevents cross-tenant data leaks and means a cache hit never contradicts the routing decision that was logged. Cache hits log `cost_usd = 0` and record the avoided cost in `saved_usd`, so `/stats` can report savings.
 
