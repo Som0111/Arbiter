@@ -102,7 +102,7 @@ Response returned to user:
 ## Each Component Explained
 
 ### 1. Auth (auth.py)
-Every request must include a header: `X-API-Key: your-secret-key`. This is set in your `.env` file as `ARBITER_API_KEY`. Without it, the gateway rejects the request. This prevents random people on the internet from using your LLM quota.
+Every request must include a header: `X-API-Key: your-secret-key`. Each tenant has its own key, set in your `.env` file as `ARBITER_KEY_<TENANT_ID>` (for example `ARBITER_KEY_TENANT_TEST`; generate them with `python scripts/generate_keys.py`). The key tells the gateway which tenant is calling, so a leaked key only exposes that one tenant. Without a valid key, the gateway rejects the request. This prevents random people on the internet from using your LLM quota.
 
 ### 2. Rate Limiter (budget.py)
 Each tenant has a requests-per-minute limit (e.g., tenant_a = 20 RPM). The limiter uses a sliding window: it counts how many requests arrived in the last 60 seconds. If over the limit, it blocks the new request.
@@ -224,7 +224,7 @@ pip install -e ".[dev]"
 
 # 2. Create .env from template
 cp .env.template .env
-# Fill in GROQ_API_KEY, GEMINI_API_KEY, ARBITER_API_KEY
+# Fill in GROQ_API_KEY, GEMINI_API_KEY, then run: python scripts/generate_keys.py (adds ARBITER_KEY_<TENANT_ID> per tenant)
 
 # 3. Start the API
 make run

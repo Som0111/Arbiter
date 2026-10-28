@@ -8,3 +8,4 @@ dist/
 *.egg-info/
 model_cache/
 .venv/
+test.py 

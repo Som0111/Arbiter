@@ -486,5 +486,479 @@
     "quality_bar": 4,
     "max_cost_usd": 0.002,
     "max_latency_ms": 15000
+  },
+  {
+    "id": "s016",
+    "tier": "simple",
+    "prompt": "Summarize in one sentence: The museum extended its opening hours on weekends to help more families visit.",
+    "expected_keywords": [
+      "museum"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0002,
+    "max_latency_ms": 3000
+  },
+  {
+    "id": "s017",
+    "tier": "simple",
+    "prompt": "Summarize in five words or fewer: The train to Leeds was cancelled because of a signal fault.",
+    "expected_keywords": [
+      "train"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0002,
+    "max_latency_ms": 3000
+  },
+  {
+    "id": "s018",
+    "tier": "simple",
+    "prompt": "Summarize this sentence in a few words: Heavy snow closed the school for two days.",
+    "expected_keywords": [
+      "snow"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0002,
+    "max_latency_ms": 3000
+  },
+  {
+    "id": "s019",
+    "tier": "simple",
+    "prompt": "Summarize in one short sentence: The new cafe on Park Road serves coffee, tea and fresh pastries every morning.",
+    "expected_keywords": [
+      "cafe"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0002,
+    "max_latency_ms": 3000
+  },
+  {
+    "id": "s020",
+    "tier": "simple",
+    "prompt": "Please summarize in under ten words: The council will repair the bridge next spring.",
+    "expected_keywords": [
+      "bridge"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0002,
+    "max_latency_ms": 3000
+  },
+  {
+    "id": "s021",
+    "tier": "simple",
+    "prompt": "Summarize the following in one line: Our team won the regional final 3-1 after trailing at half-time.",
+    "expected_keywords": [
+      "won"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0002,
+    "max_latency_ms": 3000
+  },
+  {
+    "id": "s022",
+    "tier": "simple",
+    "prompt": "Summarize in a single sentence: The software update fixes a login bug and improves startup speed.",
+    "expected_keywords": [
+      "update"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0002,
+    "max_latency_ms": 3000
+  },
+  {
+    "id": "s023",
+    "tier": "simple",
+    "prompt": "Summarize in one sentence: Tomatoes need full sun, regular watering and support as they grow tall.",
+    "expected_keywords": [
+      "tomatoes"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0002,
+    "max_latency_ms": 3000
+  },
+  {
+    "id": "s024",
+    "tier": "simple",
+    "prompt": "Summarize this headline in three words: Local library receives record number of donated books.",
+    "expected_keywords": [
+      "library"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0002,
+    "max_latency_ms": 3000
+  },
+  {
+    "id": "s025",
+    "tier": "simple",
+    "prompt": "Summarize in one sentence: The concert was moved indoors because the forecast promised heavy rain.",
+    "expected_keywords": [
+      "concert"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0002,
+    "max_latency_ms": 3000
+  },
+  {
+    "id": "m016",
+    "tier": "standard",
+    "prompt": "Explain in plain English what this SQL query returns.\n\nSELECT department, AVG(salary) AS avg_salary FROM employees WHERE hired_on > '2020-01-01' GROUP BY department ORDER BY avg_salary DESC;",
+    "expected_keywords": [
+      "department",
+      "average"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0005,
+    "max_latency_ms": 6000
+  },
+  {
+    "id": "m017",
+    "tier": "standard",
+    "prompt": "What does this JavaScript snippet log to the console, and why?\n\nconst items = ['a', 'b', 'c'];\nconsole.log(items.map((x, i) => x + i).join('-'));",
+    "expected_keywords": [
+      "a0",
+      "b1"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0005,
+    "max_latency_ms": 6000
+  },
+  {
+    "id": "m018",
+    "tier": "standard",
+    "prompt": "Summarize what this shell command does in two sentences.\n\ngrep -rn 'TODO' src/ | sort | uniq -c | sort -rn | head -5",
+    "expected_keywords": [
+      "TODO",
+      "count"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0005,
+    "max_latency_ms": 6000
+  },
+  {
+    "id": "m019",
+    "tier": "standard",
+    "prompt": "Explain what this Python function returns for the input [3, 1, 2], in two or three sentences.\n\ndef f(xs):\n    return sorted(xs)[-2]",
+    "expected_keywords": [
+      "second",
+      "2"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0005,
+    "max_latency_ms": 6000
+  },
+  {
+    "id": "m020",
+    "tier": "standard",
+    "prompt": "Write a one-paragraph docstring-style description for this Go function.\n\nfunc Clamp(v, lo, hi int) int {\n\tif v < lo {\n\t\treturn lo\n\t}\n\tif v > hi {\n\t\treturn hi\n\t}\n\treturn v\n}",
+    "expected_keywords": [
+      "clamp",
+      "range"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0005,
+    "max_latency_ms": 6000
+  },
+  {
+    "id": "m021",
+    "tier": "standard",
+    "prompt": "Explain what this regular expression matches and give two example strings that match it.\n\n^[A-Z]{2}\\d{4}$",
+    "expected_keywords": [
+      "two",
+      "letters",
+      "digits"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0005,
+    "max_latency_ms": 6000
+  },
+  {
+    "id": "m022",
+    "tier": "standard",
+    "prompt": "Describe in a short paragraph what this CSS rule does to the page.\n\n.card { display: flex; gap: 12px; justify-content: space-between; }",
+    "expected_keywords": [
+      "flex",
+      "gap"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0005,
+    "max_latency_ms": 6000
+  },
+  {
+    "id": "m023",
+    "tier": "standard",
+    "prompt": "Explain the purpose of each line in this Dockerfile in a short bulleted list.\n\nFROM python:3.12-slim\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install -r requirements.txt\nCOPY . .\nCMD [\"python\", \"main.py\"]",
+    "expected_keywords": [
+      "base image",
+      "dependencies"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0005,
+    "max_latency_ms": 6000
+  },
+  {
+    "id": "m024",
+    "tier": "standard",
+    "prompt": "Summarize in three bullets what this YAML configuration sets up.\n\nservices:\n  web:\n    image: nginx\n    ports: ['8080:80']\n  cache:\n    image: redis",
+    "expected_keywords": [
+      "nginx",
+      "redis"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0005,
+    "max_latency_ms": 6000
+  },
+  {
+    "id": "m025",
+    "tier": "standard",
+    "prompt": "Explain in plain language what the time complexity of this snippet is and why, in two or three sentences.\n\nfor x in items:\n    if x in seen:\n        continue\n    seen.add(x)",
+    "expected_keywords": [
+      "linear",
+      "set"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0005,
+    "max_latency_ms": 6000
+  },
+  {
+    "id": "m026",
+    "tier": "standard",
+    "prompt": "Read the memo and answer the question in three sentences.\n\nMemo: The office will close at 3pm on Friday for a fire drill. Staff who work remotely do not need to attend. Anyone with a meeting after 3pm should reschedule it or move it online. Building access resumes at 4pm.\n\nQuestion: What should an in-office employee with a 3:30pm meeting do?",
+    "expected_keywords": [
+      "reschedule",
+      "online"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0005,
+    "max_latency_ms": 6000
+  },
+  {
+    "id": "m027",
+    "tier": "standard",
+    "prompt": "Compare these two short product descriptions and say which is clearer for a first-time buyer, in one paragraph.\n\nA: 'A 15-inch laptop with a 10-hour battery and a backlit keyboard.'\nB: 'Powerful notebook computing with next-generation efficiency and premium everyday experience.'",
+    "expected_keywords": [
+      "A",
+      "clearer"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0005,
+    "max_latency_ms": 6000
+  },
+  {
+    "id": "m028",
+    "tier": "standard",
+    "prompt": "Summarize the passage below in three sentences, then list two questions a reader might still have.\n\nThe town replaced its old streetlights with LED lamps last year. Electricity use for lighting fell by a third, and maintenance calls dropped sharply. Some residents complain the new light is harsher, and the council has promised to test warmer bulbs.",
+    "expected_keywords": [
+      "LED",
+      "questions"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0005,
+    "max_latency_ms": 6000
+  },
+  {
+    "id": "m029",
+    "tier": "standard",
+    "prompt": "Explain the difference between a mutex and a semaphore and give one everyday analogy for each.",
+    "expected_keywords": [
+      "mutex",
+      "semaphore"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0005,
+    "max_latency_ms": 6000
+  },
+  {
+    "id": "m030",
+    "tier": "standard",
+    "prompt": "Extract the people, places and dates from this paragraph and present them as three labelled lists.\n\nOn 12 May, Priya Nair flew from Mumbai to Lisbon for a conference. She met Tomas Ribeiro there on 14 May, and the two travelled on to Porto on 16 May.",
+    "expected_keywords": [
+      "Priya",
+      "Lisbon",
+      "May"
+    ],
+    "quality_bar": 3,
+    "max_cost_usd": 0.0005,
+    "max_latency_ms": 6000
+  },
+  {
+    "id": "c011",
+    "tier": "complex",
+    "prompt": "Step 1: define the recurrence for the number of ways to climb n stairs taking 1 or 2 steps at a time. Step 2: prove by induction that it equals the Fibonacci sequence shifted by one. Step 3: derive a closed form and compute the value for n = 30.",
+    "expected_keywords": [
+      "fibonacci",
+      "induction"
+    ],
+    "quality_bar": 4,
+    "max_cost_usd": 0.002,
+    "max_latency_ms": 15000
+  },
+  {
+    "id": "c012",
+    "tier": "complex",
+    "prompt": "A tank is filled by pipe A in 6 hours and by pipe B in 9 hours, and emptied by a drain in 12 hours. All three are opened together when the tank is one third full. How long until it is full? Show each step and verify the answer by a second method.",
+    "expected_keywords": [
+      "rate",
+      "hours"
+    ],
+    "quality_bar": 4,
+    "max_cost_usd": 0.002,
+    "max_latency_ms": 15000
+  },
+  {
+    "id": "c013",
+    "tier": "complex",
+    "prompt": "Prove that the sum of the first n odd numbers is n squared. Then use that result to show that every perfect square is the sum of consecutive odd numbers, and give the decomposition of 49.",
+    "expected_keywords": [
+      "induction",
+      "odd"
+    ],
+    "quality_bar": 4,
+    "max_cost_usd": 0.002,
+    "max_latency_ms": 15000
+  },
+  {
+    "id": "c014",
+    "tier": "complex",
+    "prompt": "Three people split a bill. Ana pays 35 percent of the total, Ben pays 20 dollars more than Cara, and Cara pays half of what Ana pays. If the total is T dollars, set up the equations, solve for T and each person's share, and check that the shares add up.",
+    "expected_keywords": [
+      "equation",
+      "total"
+    ],
+    "quality_bar": 4,
+    "max_cost_usd": 0.002,
+    "max_latency_ms": 15000
+  },
+  {
+    "id": "c015",
+    "tier": "complex",
+    "prompt": "Derive the expected number of coin flips needed to see the first head with a biased coin that lands heads with probability p. Then compute it for p = 0.2 and explain how the variance behaves as p shrinks.",
+    "expected_keywords": [
+      "geometric",
+      "expected"
+    ],
+    "quality_bar": 4,
+    "max_cost_usd": 0.002,
+    "max_latency_ms": 15000
+  },
+  {
+    "id": "c016",
+    "tier": "complex",
+    "prompt": "First, explain why quicksort has O(n^2) worst-case time. Second, show an input that triggers it with a naive pivot. Third, describe two pivot strategies that avoid it and compare their expected costs.",
+    "expected_keywords": [
+      "pivot",
+      "worst"
+    ],
+    "quality_bar": 4,
+    "max_cost_usd": 0.002,
+    "max_latency_ms": 15000
+  },
+  {
+    "id": "c017",
+    "tier": "complex",
+    "prompt": "A bank offers 5 percent annual interest compounded monthly. Step 1: find the effective annual rate. Step 2: compute the balance after 7 years on a 10,000 deposit. Step 3: find how many years until the balance doubles. Show the formulas used.",
+    "expected_keywords": [
+      "effective",
+      "compound"
+    ],
+    "quality_bar": 4,
+    "max_cost_usd": 0.002,
+    "max_latency_ms": 15000
+  },
+  {
+    "id": "c018",
+    "tier": "complex",
+    "prompt": "Given a sorted array rotated at an unknown pivot, reason step by step about how to find the minimum in O(log n), prove why the invariant holds on each iteration, and handle duplicates, explaining what breaks in the worst case.",
+    "expected_keywords": [
+      "binary search",
+      "invariant"
+    ],
+    "quality_bar": 4,
+    "max_cost_usd": 0.002,
+    "max_latency_ms": 15000
+  },
+  {
+    "id": "c019",
+    "tier": "complex",
+    "prompt": "Two players alternately remove 1 to 3 stones from a pile of n stones, and whoever takes the last stone wins. Work out for which n the first player wins, prove your claim by induction, and describe the winning strategy.",
+    "expected_keywords": [
+      "multiple of 4",
+      "induction"
+    ],
+    "quality_bar": 4,
+    "max_cost_usd": 0.002,
+    "max_latency_ms": 15000
+  },
+  {
+    "id": "c020",
+    "tier": "complex",
+    "prompt": "Show that the harmonic series diverges. Then explain why the alternating harmonic series converges, state what it converges to, and describe what goes wrong if you rearrange its terms.",
+    "expected_keywords": [
+      "diverges",
+      "converges",
+      "rearrange"
+    ],
+    "quality_bar": 4,
+    "max_cost_usd": 0.002,
+    "max_latency_ms": 15000
+  },
+  {
+    "id": "c021",
+    "tier": "complex",
+    "prompt": "Write a Python function that reads a CSV file, groups rows by the 'customer_id' column, sums the 'amount' column per customer, skips malformed rows with a warning, and returns the top five customers. Include tests.",
+    "expected_keywords": [
+      "csv",
+      "customer_id",
+      "def "
+    ],
+    "quality_bar": 4,
+    "max_cost_usd": 0.002,
+    "max_latency_ms": 15000
+  },
+  {
+    "id": "c022",
+    "tier": "complex",
+    "prompt": "This function is meant to remove duplicates while preserving order but it sometimes drops valid items. Find the bug, explain why it happens, fix it, and add a test that would have caught it.\n\ndef dedupe(xs):\n    seen = []\n    out = []\n    for x in xs:\n        if x not in seen and x:\n            seen.append(x)\n            out.append(x)\n    return out",
+    "expected_keywords": [
+      "falsy",
+      "zero"
+    ],
+    "quality_bar": 4,
+    "max_cost_usd": 0.002,
+    "max_latency_ms": 15000
+  },
+  {
+    "id": "c023",
+    "tier": "complex",
+    "prompt": "Design a simple job queue for sending emails that retries failures up to three times with exponential backoff, never sends the same email twice, and survives a process restart. Describe the data model, the worker loop and the failure cases.",
+    "expected_keywords": [
+      "retry",
+      "idempotent"
+    ],
+    "quality_bar": 4,
+    "max_cost_usd": 0.002,
+    "max_latency_ms": 15000
+  },
+  {
+    "id": "c024",
+    "tier": "complex",
+    "prompt": "Implement a function in JavaScript that debounces another function, supports leading and trailing options, and can be cancelled. Explain how it works and include a short usage example.",
+    "expected_keywords": [
+      "debounce",
+      "cancel"
+    ],
+    "quality_bar": 4,
+    "max_cost_usd": 0.002,
+    "max_latency_ms": 15000
+  },
+  {
+    "id": "c025",
+    "tier": "complex",
+    "prompt": "Write a SQL migration that adds a non-null 'status' column to a table with 50 million rows without locking it for long, backfills it in batches, and then adds a constraint. Explain the order of operations and the rollback plan.",
+    "expected_keywords": [
+      "batch",
+      "rollback"
+    ],
+    "quality_bar": 4,
+    "max_cost_usd": 0.002,
+    "max_latency_ms": 15000
   }
 ]

@@ -238,5 +238,401 @@
   {
     "prompt": "Write a Python script that reads a CSV of transactions with columns customer_id, amount and date, groups spending by customer, and prints the top 5 spenders. Handle malformed rows gracefully and add basic tests.",
     "tier": "complex"
+  },
+  {
+    "prompt": "Explain what this SQL query returns in plain English.\n\nSELECT region, COUNT(*) FROM orders WHERE status = 'shipped' GROUP BY region HAVING COUNT(*) > 10;",
+    "tier": "standard"
+  },
+  {
+    "prompt": "What does this JavaScript snippet print, and why?\n\nconst xs = [1, 2, 3];\nconsole.log(xs.map(x => x * 2).filter(x => x > 2));",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Summarize what this bash one-liner does: find . -name '*.log' -mtime +7 -delete",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain the difference between a process and a thread, and give one example of when you would use each.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain the difference between SQL and NoSQL databases in a short paragraph.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain the difference between HTTP and HTTPS and why the latter matters for logins.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Compare REST and GraphQL in four or five sentences, mentioning one strength of each.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain the difference between supervised and unsupervised learning with a short example of each.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain the difference between a list and a set in Python in a few sentences.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Summarize the following paragraph in two sentences, then say which sentence carries the main point.\n\nThe city council approved a new bike lane network after months of debate. Supporters argued it would cut traffic and emissions, while shopkeepers worried about losing parking. The final plan keeps parking on one side of every street and adds lanes on the other.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Summarize the key points of this email in three bullets and suggest a one-line subject.\n\nHi all, the quarterly review has moved to Thursday at 2pm. Please send your slides by Wednesday noon. Remember that the budget section must include last year's figures for comparison. Lunch will be provided.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Summarize this README section and explain what the user is expected to do first.\n\nTo get started, install the dependencies with the package manager, copy the example config to a new file, and fill in your API token. Then run the setup command once to create the local database.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Summarize the article below and explain in one sentence why the author is skeptical.\n\nThe startup claims its battery lasts ten years, but the figure comes from a lab test at constant low load. Independent engineers note that real devices cycle between heavy and light use, which ages cells faster.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain why the sky is dark at night even though the universe contains so many stars, in a short paragraph.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain why index lookups are usually faster than scanning a whole table, in a few sentences.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain why vaccines sometimes need booster shots, in plain language, in about four sentences.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain why recursion can cause a stack overflow and how a loop avoids it.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain how a hash map handles collisions, with one example.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain how DNS resolves a domain name into an IP address, in a short paragraph.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain how compound interest differs from simple interest and give a quick numeric example.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Rewrite the following paragraph so it sounds more formal, keeping the meaning the same.\n\nHey, just wanted to let you know the server was down for a bit this morning but it's back up now, and we think it was a config thing.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Read the passage and answer the question in two sentences.\n\nPassage: The lighthouse was built in 1872 after three ships ran aground on the reef. It was automated in 1965 and now operates as a museum.\nQuestion: Why was the lighthouse built, and what happened to it later?",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Classify each review below as positive, negative or mixed and give a one-line reason for each.\n1. 'Fast delivery but the box was crushed.'\n2. 'Absolutely love it, would buy again.'\n3. 'Stopped working after a week.'",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Extract all dates and the event attached to each from this text, as a list.\n\nThe workshop begins on 3 March, registration closes on 20 February, and the follow-up session is on 14 April.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Write a short, polite reply declining a meeting invitation because of a scheduling conflict, and offer two alternative times.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Describe the pros and cons of working from home in two short lists, three items each.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "What are the main differences between TCP and UDP? Answer in a short paragraph and mention one use case for each.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Give a short overview of how the water cycle works, covering evaporation, condensation and precipitation.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain what a closure is in JavaScript and show one short example.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain what happens, in simple terms, when you type a URL into a browser and press enter.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Compare two ways of caching web pages, in the browser and on a CDN, and say when each is useful.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain the idea behind binary search in a short paragraph and state its time complexity.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Turn these meeting notes into three action items with owners.\n\nDana will update the pricing page by Friday. Lee mentioned that the contract needs review, and Sam offered to ask legal. Dana also wants a draft of the launch email.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Why do some countries use daylight saving time while others do not? Answer in a short paragraph.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Summarize the causes of the 2008 financial crisis in a short paragraph and explain why banks were affected so heavily.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Explain the difference between precision and recall, using a spam filter as the example.",
+    "tier": "standard"
+  },
+  {
+    "prompt": "Debug this function, explain what is wrong, and give the fixed version.\n\ndef avg(xs):\n    total = 0\n    for x in xs:\n        total += x\n    return total / len(xs) + 1",
+    "tier": "complex"
+  },
+  {
+    "prompt": "This loop is supposed to print every pair of numbers that sum to 10 but it prints duplicates and misses (5, 5). Find the bugs, explain each one and fix the code.\n\nfor i in range(10):\n    for j in range(i, 10):\n        if i + j == 10:\n            print(i, j)",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Write a function that merges overlapping intervals, handles an empty list and unsorted input, and includes unit tests covering at least three edge cases.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Write a Python function that parses a log line with a timestamp, level and message, handles malformed lines by raising a clear error, and includes docstrings and tests.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Write a function that validates an IPv4 address, rejects leading zeros and out-of-range octets, and returns a descriptive error for each failure. Include tests.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Implement a rate limiter class in Go that supports per-user limits, is safe for concurrent use, and evicts idle users. Explain your design choices.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Implement a trie in Python with insert, search, prefix search and delete, then analyze the time and space complexity of each operation.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Implement Dijkstra's algorithm in Python using a heap, explain why it fails with negative edge weights, and show a small counterexample.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Step 1: define a data model for a library system. Step 2: write the SQL schema. Step 3: write queries for overdue books per member. Step 4: explain the indexes you would add.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "First, derive the closed form of the sum of the first n squares. Second, prove it by induction. Finally, use it to compute the sum for n = 100.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Step 1: explain how gradient descent updates parameters. Step 2: derive the update for linear regression with mean squared error. Step 3: discuss what happens when the learning rate is too large.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Design a URL shortener that must handle 1000 writes per second, keep links for five years, support custom aliases and provide click analytics. Discuss storage, ID generation, caching and failure modes.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Design a notification system that supports email, SMS and push, guarantees at-least-once delivery, deduplicates retries and lets users set quiet hours. Describe components, data flow and trade-offs.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Propose an architecture for a real-time chat service with 100,000 concurrent users, message history, read receipts and offline delivery. Compare WebSockets with long polling and justify your choice.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "We need to migrate a 2 TB PostgreSQL database to a new region with under five minutes of downtime and a rollback plan. Outline the approach, the risks at each stage and how you would test it.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Prove that the square root of 2 is irrational, then generalize the argument to the square root of any prime.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Prove by induction that 2^n > n^2 for all integers n >= 5, and explain why the base case cannot start earlier.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Derive the formula for the sum of a geometric series, then use it to find the present value of a perpetuity that grows at 2 percent with a 7 percent discount rate.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "A factory has two machines. Machine A produces 120 units per hour with a 3 percent defect rate, machine B produces 80 units per hour with a 5 percent defect rate. If a random defective unit is picked from one hour of output, what is the probability it came from machine A? Show your working.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Two trains start 300 km apart and travel toward each other at 70 and 80 km/h. A bird flies between them at 120 km/h until they meet. How far does the bird fly? Solve it two different ways.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Find the bug in this concurrent counter, explain the race condition, and fix it with a lock and then with an atomic.\n\nclass Counter:\n    def __init__(self):\n        self.n = 0\n    def inc(self):\n        self.n += 1",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Refactor the following code to remove the global state, add type hints and make it testable, then explain each change.\n\ncache = {}\ndef get(k):\n    if k not in cache:\n        cache[k] = load(k)\n    return cache[k]",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Write an async Python function that downloads a list of URLs concurrently with a limit of 5 at a time, retries failures with exponential backoff and returns results in input order.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Write a SQL query to find the top three customers by revenue in each region, explain how it works, and discuss how it would perform on a table with 100 million rows.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Write a bash script that backs up a directory, rotates the last seven backups, logs failures and exits non-zero on error, and explain each part.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Implement an LFU cache with O(1) get and put in Python, explain the data structures you chose, and write tests for tie-breaking.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Analyze the time complexity of this function, find the redundant work, and rewrite it using dynamic programming.\n\ndef fib(n):\n    return n if n < 2 else fib(n - 1) + fib(n - 2)",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Compare three strategies for sharding a multi-tenant database, covering hot tenants, rebalancing, cross-tenant queries and operational cost, and recommend one with reasons.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Write a TypeScript function that deeply merges two objects, handles arrays and null values, avoids prototype pollution, and include tests.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Explain how the Raft consensus algorithm elects a leader and replicates logs, then walk through what happens when the leader crashes mid-replication.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Design a schema and API for a booking system that prevents double-booking under concurrent requests. Show how you would use transactions or locks and how you would test the race condition.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "Write a regular expression-based tokenizer for arithmetic expressions with parentheses and unary minus, then implement a parser that evaluates them with correct precedence.",
+    "tier": "complex"
+  },
+  {
+    "prompt": "What is the capital of Japan?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Who wrote Pride and Prejudice?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "How many continents are there?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Is the Pacific the largest ocean? Yes or no.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Does water boil at 100 degrees Celsius at sea level? Yes or no.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Is Python a compiled language? Yes or no.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Translate 'good morning' into French.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Translate 'thank you very much' into Spanish.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Translate 'where is the train station' into Italian.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Translate the word 'cat' into German.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Translate 'I am hungry' into Portuguese.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Define the word 'ephemeral'.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Define 'photosynthesis' in one sentence.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Define the term 'latency' in networking.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "What is the square root of 144?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "What is 15 percent of 200?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "What is the past tense of 'swim'?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "What does HTTP stand for?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Name the largest mammal on Earth.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "What is the opposite of 'generous'?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Give a synonym for 'quick'.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "How many minutes are in a day?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "What color do you get by mixing blue and yellow?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "In which year did World War II end?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Spell the word 'necessary' backwards.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "I'm putting together a trivia night for my coworkers and need an easy opener. Just tell me: what is the tallest mountain in the world?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Summarize in one sentence: The bakery on Main Street opens at six every morning and sells out of bread by noon.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Summarize this in five words or fewer: The library will be closed on Monday for maintenance.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Summarize in a few words: Our flight was delayed two hours because of fog.",
+    "tier": "simple"
+  },
+  {
+    "prompt": "What is the plural of 'mouse'?",
+    "tier": "simple"
+  },
+  {
+    "prompt": "Convert 5 kilometers to miles.",
+    "tier": "simple"
   }
 ]

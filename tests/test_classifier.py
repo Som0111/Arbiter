@@ -89,7 +89,7 @@ def test_benchmark_prompts_absent_from_training_data():
     bench = {_norm(t["prompt"]) for t in json.loads(
         (TRAIN_PATH.parent / "benchmark" / "benchmark.json").read_text(encoding="utf-8"))}
     train = json.loads(TRAIN_PATH.read_text(encoding="utf-8"))
-    assert len(train) == 60
+    assert len(train) >= 150
     assert not [r["prompt"][:40] for r in train if _norm(r["prompt"]) in bench]
 
 

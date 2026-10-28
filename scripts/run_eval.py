@@ -12,6 +12,8 @@ import json
 import os
 import random
 import re
+import secrets
+import sys
 import time
 from datetime import UTC, datetime
 from pathlib import Path
@@ -346,13 +348,43 @@ def build_metadata(tasks, baseline_model: str) -> dict:
     }
 
 
+def routing_only() -> int:
+    """Routing accuracy of the classifier on the benchmark (assigned tier == expected tier)."""
+    from arbiter.classifier import classify
+
+    tasks = json.loads(BENCHMARK.read_text(encoding="utf-8"))
+    got = [(t["tier"], classify(t["prompt"]), t["id"]) for t in tasks]
+    # The first 40 tasks are the original fixed set; later ids were added afterwards (Task 3e).
+    original_max = {"s": 15, "m": 15, "c": 10}
+    groups = {"original": [g for g in got if int(g[2][1:]) <= original_max[g[2][0]]]}
+    groups["added"] = [g for g in got if g not in groups["original"]]
+    groups["all"] = got
+    for name, grp in groups.items():
+        print(f"== {name}: {len(grp)} tasks ==")
+        for tier in ("simple", "standard", "complex"):
+            rows = [g for g in grp if g[0] == tier]
+            ok = sum(e == a for e, a, _ in rows)
+            print(f"  {tier:<9}{ok}/{len(rows)}  {ok / len(rows) * 100:.1f}%" if rows else f"  {tier}: none")
+        ok = sum(e == a for e, a, _ in grp)
+        print(f"  routing accuracy: {ok}/{len(grp)} = {ok / len(grp) * 100:.1f}%")
+    for e, a, i in got:
+        if e != a:
+            print(f"  miss {i}: expected {e}, got {a}")
+    return 0
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--resume", action="store_true")
     ap.add_argument("--limit", type=int)
     ap.add_argument("--report-only", action="store_true",
                     help="rebuild EVAL_REPORT.md from saved reports/*.json, no API calls")
+    ap.add_argument("--routing-only", action="store_true",
+                    help="classify the benchmark and report routing accuracy; no LLM calls")
     args = ap.parse_args()
+
+    if args.routing_only:
+        sys.exit(routing_only())
 
     REPORTS.mkdir(exist_ok=True)
     os.environ["LOG_PATH"] = str(REPORTS / "eval_requests.jsonl")  # keep eval out of logs/
@@ -362,7 +394,6 @@ def main() -> None:
     from fastapi.testclient import TestClient
 
     from arbiter.api import create_app
-    from arbiter.config import get_settings
     from arbiter.router import TIER_MODEL_MAP, _resolve_key, call_llm, model_list
 
     tasks = json.loads(BENCHMARK.read_text(encoding="utf-8"))
@@ -388,12 +419,15 @@ def main() -> None:
                 "tokens_out": r.tokens_out, "cost_usd": r.cost_usd,
                 "latency_ms": (time.perf_counter() - t0) * 1000}
 
+    # In-process app: use a throwaway key for the eval tenant, never a real one.
+    eval_key = f"arb_eval_{secrets.token_hex(8)}"
+    os.environ[f"ARBITER_KEY_{TENANT.upper()}"] = eval_key
     client = TestClient(create_app())
-    headers = {"X-API-Key": get_settings().arbiter_api_key}
+    headers = {"X-API-Key": eval_key}
 
     def routed(task):
         resp = client.post("/generate", headers=headers, json={
-            "prompt": task["prompt"], "tenant_id": TENANT, "max_tokens": MAX_TOKENS})
+            "prompt": task["prompt"], "max_tokens": MAX_TOKENS})
         if resp.status_code != 200:
             raise RuntimeError(f"HTTP {resp.status_code}: {resp.text[:150]}")
         d = resp.json()

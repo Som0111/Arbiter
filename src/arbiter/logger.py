@@ -1,9 +1,11 @@
 import json
 import logging
 import os
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime, timedelta
 
+import httpx
 import numpy as np
 
 log = logging.getLogger(__name__)
@@ -78,11 +80,45 @@ def log_path() -> str:
     return os.environ.get("LOG_PATH", "logs/requests.jsonl")
 
 
+_logtail_client: httpx.Client | None = None
+_pool = ThreadPoolExecutor(max_workers=1)  # keeps the 3s-timeout POST off the event loop
+
+
+def _get_logtail_client(token: str) -> httpx.Client:
+    global _logtail_client
+    if _logtail_client is None:
+        _logtail_client = httpx.Client(
+            base_url="https://in.logs.betterstack.com",
+            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+            timeout=3.0,
+        )
+    return _logtail_client
+
+
+def _ship_to_logtail(entry: RequestLog, token: str) -> None:
+    """Best-effort: any failure (including non-2xx) is logged at DEBUG, never raised."""
+    try:
+        _get_logtail_client(token).post("/", json=asdict(entry)).raise_for_status()
+    except Exception as exc:  # noqa: BLE001
+        log.debug("logtail ship failed: %s", type(exc).__name__)  # no exc_info: keep token out
+
+
 def write_log(entry: RequestLog, path: str | None = None) -> None:
-    path = path or log_path()
-    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
-    with open(path, "a") as f:
-        f.write(json.dumps(asdict(entry)) + "\n")
+    """Best-effort: swallows all exceptions so logging never fails a request."""
+    try:
+        path = path or log_path()
+        os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+        with open(path, "a") as f:
+            f.write(json.dumps(asdict(entry)) + "\n")
+    except Exception:
+        log.debug("local jsonl write failed", exc_info=True)
+    try:
+        from arbiter.config import get_settings
+
+        if token := get_settings().logtail_source_token:
+            _pool.submit(_ship_to_logtail, entry, token)
+    except Exception:
+        log.debug("logtail dispatch failed", exc_info=True)
 
 
 def read_logs(path: str | None = None) -> list[dict]:

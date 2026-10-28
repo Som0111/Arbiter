@@ -16,6 +16,11 @@ TIER_MODEL_MAP = {
 }
 
 ATTEMPTS = 3
+# Load test (local, scripts/load_test.py --requests 12 --concurrency 3, 2026-10-27), 12/12 OK in
+# every run; p95 is the max of 12 so it is noisy: baseline p50/p95 = 1103/9473, 867/7042,
+# 1089/11119 ms; with 0-0.25s retry jitter 1647/15346, 1813/8508 ms. No measured gain (unverified whether any 429 retries
+# occurred to exercise it) and p95 did not improve, so jitter was reverted. TIMEOUT_S stays 15:
+# a lower value is not shown safe under free-tier quota pressure.
 TIMEOUT_S = 15
 
 

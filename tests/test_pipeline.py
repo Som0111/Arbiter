@@ -2,7 +2,7 @@ from datetime import UTC, datetime
 from unittest.mock import MagicMock
 
 import pytest
-from conftest import HEADERS, TENANTS
+from conftest import HEADERS, HEADERS_A, TENANTS
 
 from arbiter.budget import BudgetTracker, RateLimiter
 from arbiter.logger import RequestLog, read_logs, write_log
@@ -54,8 +54,8 @@ def test_generate_schema_and_side_effects(app, client, fake_llm):
 
 
 def test_tier_cap_applied_to_llm_call(client, fake_llm):
-    code = {"prompt": "Implement a function to debug this: def f(): pass", "tenant_id": "tenant_a"}
-    client.post("/generate", json=code, headers=HEADERS)
+    code = {"prompt": "Implement a function to debug this: def f(): pass"}
+    client.post("/generate", json=code, headers=HEADERS_A)
     assert fake_llm.call_args.args[0] == "standard"  # complex capped for tenant_a
 
 
@@ -63,31 +63,36 @@ def test_all_models_exhausted_503_and_logged(client, fake_llm):
     fake_llm.side_effect = GatewayError("all models exhausted")
     r = client.post("/generate", json=BODY, headers=HEADERS)
     assert r.status_code == 503
+    assert r.json() == {"error": "all_models_exhausted",
+                        "message": "All models failed or are unavailable"}
     row = read_logs()[0]
     assert (row["success"], row["error"]) == (False, "all_models_exhausted")
 
 
-def test_unknown_tenant_404_and_bad_input_422(client):
-    r = client.post("/generate", json={"prompt": "hi", "tenant_id": "ghost"}, headers=HEADERS)
-    assert r.status_code == 404
-    r = client.post("/generate", json={"prompt": "", "tenant_id": "tenant_a"}, headers=HEADERS)
+def test_bad_input_422(client):
+    r = client.post("/generate", json={"prompt": ""}, headers=HEADERS_A)
     assert r.status_code == 422
 
 
+def test_body_tenant_id_is_ignored(app, client):
+    client.post("/generate", json={"prompt": "hi", "tenant_id": "tenant_a"}, headers=HEADERS)
+    assert app.state.budget.get_remaining("tenant_a") == pytest.approx(0.10)  # charged tenant_test
+
+
 def test_rate_limit_blocks_after_rpm(client):
-    body = {"prompt": "hi", "tenant_id": "tenant_a"}
-    codes = [client.post("/generate", json=body, headers=HEADERS).status_code for _ in range(25)]
+    body = {"prompt": "hi"}
+    codes = [client.post("/generate", json=body, headers=HEADERS_A).status_code for _ in range(25)]
     assert codes[:20] == [200] * 20
     assert codes[20:] == [429] * 5
-    r = client.post("/generate", json=body, headers=HEADERS)
-    assert r.json() == {"error": "rate_limited"}
+    r = client.post("/generate", json=body, headers=HEADERS_A)
+    assert r.json() == {"error": "rate_limited", "message": "Request rate limit exceeded"}
 
 
 def test_over_budget_429(app, client):
     app.state.budget.record_actual("tenant_a", 0.10)
-    r = client.post("/generate", json={"prompt": "hi", "tenant_id": "tenant_a"}, headers=HEADERS)
+    r = client.post("/generate", json={"prompt": "hi"}, headers=HEADERS_A)
     assert r.status_code == 429
-    assert r.json() == {"error": "budget_exceeded"}
+    assert r.json() == {"error": "budget_exceeded", "message": "Daily budget exhausted"}
 
 
 def test_stats_aggregates_log(client):
@@ -142,8 +147,8 @@ def test_second_identical_request_is_cache_hit_with_zero_cost(app, client, fake_
 
 def test_other_tenant_does_not_get_cache_hit(client, fake_llm):
     client.post("/generate", json=BODY, headers=HEADERS)
-    other = {"prompt": "hi", "tenant_id": "tenant_a"}
-    assert client.post("/generate", json=other, headers=HEADERS).json()["cache_hit"] is False
+    other = {"prompt": "hi"}
+    assert client.post("/generate", json=other, headers=HEADERS_A).json()["cache_hit"] is False
     assert fake_llm.call_count == 2
 
 

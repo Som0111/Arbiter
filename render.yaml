@@ -9,7 +9,15 @@ services:
         sync: false
       - key: GEMINI_API_KEY
         sync: false
-      - key: ARBITER_API_KEY
+      - key: ARBITER_KEY_TENANT_A
+        sync: false
+      - key: ARBITER_KEY_TENANT_B
+        sync: false
+      - key: ARBITER_KEY_TENANT_TEST
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: LOGTAIL_SOURCE_TOKEN
         sync: false
       - key: LANGFUSE_PUBLIC_KEY
         sync: false

@@ -4,7 +4,7 @@ from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 
 import pytest
-from conftest import HEADERS
+from conftest import HEADERS, HEADERS_A
 
 from arbiter.logger import (
     RequestLog,
@@ -49,9 +49,9 @@ def test_log_line_has_all_required_fields(client):
 
 
 def test_capped_and_cache_hit_flags_logged(client):
-    code = {"prompt": "Implement and debug this: def f(): pass", "tenant_id": "tenant_a"}
-    client.post("/generate", json=code, headers=HEADERS)
-    client.post("/generate", json=code, headers=HEADERS)  # same prompt -> cache hit
+    code = {"prompt": "Implement and debug this: def f(): pass"}
+    client.post("/generate", json=code, headers=HEADERS_A)
+    client.post("/generate", json=code, headers=HEADERS_A)  # same prompt -> cache hit
     first, second = read_logs()
     assert (first["tier"], first["tier_capped"], first["cache_hit"]) == ("standard", True, False)
     assert (second["cache_hit"], second["cost_usd"], second["saved_usd"]) == (True, 0.0, 0.001)

@@ -37,7 +37,8 @@ class BudgetTracker:
             self._spent[tenant_id][self._today()] = self._spent_today(tenant_id) + estimated_cost
             return True
 
-    def record_actual(self, tenant_id: str, actual_cost: float, reserved: float = 0.0) -> None:
+    def record_actual(self, tenant_id: str, actual_cost: float, reserved: float = 0.0,
+                      request_id: str = "") -> None:  # request_id: only used by the Redis tracker
         """Book the real cost, replacing any `reserved` amount taken by check_and_reserve."""
         with self._lock:
             day = self._today()

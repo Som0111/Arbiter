@@ -183,7 +183,8 @@ line-length = 100
 # Required
 GROQ_API_KEY=
 GEMINI_API_KEY=
-ARBITER_API_KEY=any-long-random-string-for-gateway-auth
+# Per-tenant keys, one per tenant in tenants.yaml (generate with scripts/generate_keys.py)
+# ARBITER_KEY_<TENANT_ID_UPPER>=arb_<tenant>_<secret>
 
 # Optional (tracing)
 LANGFUSE_PUBLIC_KEY=
@@ -355,7 +356,6 @@ import yaml
 class Settings(BaseSettings):
     groq_api_key: str
     gemini_api_key: str
-    arbiter_api_key: str
     langfuse_public_key: str = ""
     langfuse_secret_key: str = ""
     langfuse_host: str = "https://cloud.langfuse.com"
@@ -370,7 +370,7 @@ def load_tenants() -> dict:
 
 ### 2.2 auth.py
 - FastAPI dependency: reads `X-API-Key` header.
-- Compares against `settings.arbiter_api_key`.
+- Looks the key up in a map built from `ARBITER_KEY_<TENANT_ID_UPPER>` env vars and returns that tenant_id.
 - Returns 401 if missing or wrong.
 
 ### 2.3 budget.py
@@ -961,7 +961,7 @@ services:
         sync: false
       - key: GEMINI_API_KEY
         sync: false
-      - key: ARBITER_API_KEY
+      - key: ARBITER_KEY_TENANT_A   # one ARBITER_KEY_<TENANT_ID_UPPER> per tenant
         sync: false
       - key: LANGFUSE_PUBLIC_KEY
         sync: false
@@ -992,7 +992,7 @@ docker stop $(docker ps -q --filter "ancestor=arbiter")
 1. Go to [render.com](https://render.com) → New → Web Service.
 2. Connect GitHub → select `arbiter` repo.
 3. Choose "Use render.yaml".
-4. Add all env vars in the Render dashboard (GROQ_API_KEY, GEMINI_API_KEY, ARBITER_API_KEY, LANGFUSE keys).
+4. Add all env vars in the Render dashboard (GROQ_API_KEY, GEMINI_API_KEY, one ARBITER_KEY_<TENANT_ID_UPPER> per tenant, LANGFUSE keys).
 5. Click Deploy.
 6. Copy the live URL (e.g. `https://arbiter.onrender.com`).
 7. Test: `curl https://arbiter.onrender.com/health`.
@@ -1051,6 +1051,26 @@ curl https://[render-url]/health   # live URL responds
 **Expected:** All green.
 
 ---
+
+## Known Limitations — Classifier (Task 3)
+
+**Routing accuracy (assigned tier == expected tier, `python scripts/run_eval.py --routing-only`):**
+
+| Benchmark | Tasks | Routing accuracy |
+|---|---|---|
+| Original (fixed set) | 40 | **87.5%** (35/40) — rules were tuned on this set, so treat it as optimistic |
+| All (original + 40 added in Task 3e) | 80 | **78.8%** (63/80) — the cleaner estimate |
+
+On the 40 added tasks alone the classifier scores 70.0% (standard 6/15). Cross-validation on the training set (0.84) is informational only.
+
+**Known failure: explain-vs-write.** The classifier has no signal that separates *explaining or summarizing existing code* (standard) from *writing or debugging code* (complex). Features are token count, keyword flags, sentence/question counts and similar, none of which capture the verb's intent. Observed on the added set:
+
+- "Explain this SQL/JavaScript/regex/function" prompts are routed to complex (m016, m019, m020, m021, m025, m027).
+- Short code/config explanation prompts are routed to simple (m018, m022, m024).
+- Multi-requirement code tasks phrased plainly are routed too low (c017, c021).
+- The `bug`/`debug` substring rule fires on prompts that merely mention a bug (s022, m015).
+
+Impact: standard tasks over-routed to complex cost more than necessary; complex tasks routed too low risk lower quality. Not fixed. Candidate remedy if revisited: features/training data aimed at the explain-vs-write boundary (about 60 more labelled examples), re-measured on the 80-task benchmark.
 
 ## Phase Summary
 

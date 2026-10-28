@@ -147,6 +147,8 @@ def test_valid_pricing_loads(tmp_path):
 
 
 def test_app_refuses_to_start_when_pricing_missing(monkeypatch):
+    from conftest import TENANTS
+
     from arbiter.api import create_app
 
     def broken():
@@ -154,7 +156,7 @@ def test_app_refuses_to_start_when_pricing_missing(monkeypatch):
 
     monkeypatch.setattr("arbiter.api.model_list", broken)
     with pytest.raises(ValueError, match="pricing"):
-        create_app({})
+        create_app(TENANTS)
 
 
 def test_tier3_passes_groq_openai_compatible_api_base():
